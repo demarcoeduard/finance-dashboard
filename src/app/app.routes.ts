@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'main-accounts', component: MainAccountsComponent },
   { path: 'income-accounts', component: IncomeAccountsComponent },
-  { path: 'expense-accounts', component: ExpenseAccountsComponent }
+  { path: 'expense-accounts', component: ExpenseAccountsComponent },
   { path: 'transfer-transactions', component: TransferTransactionsComponent },
   { path: 'income-transactions', component: IncomeTransactionsComponent },
   { path: 'expense-transactions', component: ExpenseTransactionsComponent }
