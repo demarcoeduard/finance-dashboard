@@ -8,8 +8,17 @@
 
 :root {
   --main: #4F83C3;
-  --light: #F7F9FC;
-  --dark: #1F2933;
+  --primary: #F7F9FC;
+  --secondary: #1F2933;
+}
+
+[data-theme="dark"] {
+  --primary: #1F2933;
+  --secondary: #F7F9FC;
+}
+
+body {
+  background-color: var(--primary);
 }
 
 .nunito-sans-regular {
