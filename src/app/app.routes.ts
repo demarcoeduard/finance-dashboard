@@ -10,13 +10,14 @@ import { IncomeTransactionsComponent } from './income-transactions/income-transa
 import { ExpenseTransactionsComponent } from './expense-transactions/expense-transactions.component';
 
 export const routes: Routes = [
-  { path: '', component: WelcomeComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'welcome' },
+  { path: 'welcome', component: WelcomeComponent, data: {title: 'Welcome'} },
   { path: 'auth-form', component: AuthFormComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'main-accounts', component: MainAccountsComponent },
-  { path: 'income-accounts', component: IncomeAccountsComponent },
-  { path: 'expense-accounts', component: ExpenseAccountsComponent },
-  { path: 'transfer-transactions', component: TransferTransactionsComponent },
-  { path: 'income-transactions', component: IncomeTransactionsComponent },
-  { path: 'expense-transactions', component: ExpenseTransactionsComponent }
+  { path: 'dashboard', component: DashboardComponent, data: {title: 'Dashboard'} },
+  { path: 'main-accounts', component: MainAccountsComponent, data: {title: 'Main'} },
+  { path: 'income-accounts', component: IncomeAccountsComponent, data: {title: 'Income'} },
+  { path: 'expense-accounts', component: ExpenseAccountsComponent, data: {title: 'Expense'} },
+  { path: 'transfer-transactions', component: TransferTransactionsComponent, data: {title: 'Transfer'} },
+  { path: 'income-transactions', component: IncomeTransactionsComponent, data: {title: 'Income'} },
+  { path: 'expense-transactions', component: ExpenseTransactionsComponent, data: {title: 'Expense'} }
 ];
