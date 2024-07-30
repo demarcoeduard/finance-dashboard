@@ -1,1 +1,58 @@
-<p>navigation works!</p>
+<div class="small-header">
+  <i class="fa-solid fa-bars-staggered" (click)="toggleNav()"></i>
+  <p class="nunito-sans-bold title">{{ title }}</p>
+</div>
+@if(isOpen) {
+  <header [@drawer]>
+    <i class="fa-solid fa-xmark" (click)="toggleNav()"></i>
+    <nav>
+      <a routerLink="welcome" routerLinkActive="active" class="nunito-sans-bold link">Welcome</a>
+      <a routerLink="dashboard" routerLinkActive="active" class="nunito-sans-bold link">Dashboard</a>
+      <div>
+        <a routerLink="main-accounts" routerLinkActive="active" class="nunito-sans-bold link">Accounts</a>
+        <a routerLink="main-accounts" class="sub-link">
+          <input type="radio" checked id="main-accounts" name="accounts">
+          <label for="main-accounts" class="nunito-sans-bold">Main</label>
+        </a>
+        <a routerLink="income-accounts" class="sub-link">
+          <input type="radio" id="income-accounts" name="accounts">
+          <label for="income-accounts" class="nunito-sans-bold">Income</label>
+        </a>
+        <a routerLink="expense-accounts" class="sub-link">
+          <input type="radio" id="expense-accounts" name="accounts">
+          <label for="expense-accounts" class="nunito-sans-bold">Expense</label>
+        </a>  
+      </div>
+      <div>
+        <a routerLink="transfer-transactions" routerLinkActive="active" class="nunito-sans-bold link">Transactions</a>
+        <a routerLink="transfer-transactions" class="sub-link">
+          <input type="radio" id="transfer-transactions" name="transactions">
+          <label for="transfer-transactions" class="nunito-sans-bold">Transfer</label>
+        </a>
+        <a routerLink="income-transactions" class="sub-link">
+          <input type="radio" id="income-transactions" name="transactions">
+          <label for="income-transactions" class="nunito-sans-bold">Income</label>
+        </a>
+        <a routerLink="expense-transactions" class="sub-link">
+          <input type="radio" id="expense-transactions" name="transactions">
+          <label for="expense-transactions" class="nunito-sans-bold">Expense</label>
+        </a>
+      </div>
+    </nav>
+    <div class="btn-container">
+      <div class="btn" (click)="toggleTheme()">
+        <div #btn class="indicator" [class]="{'dark': isDarkMode === true}">
+          <div class="icon-container">
+            <i #icon [class]="{
+              'icon': true, 
+              'fa-solid': true, 
+              'fa-moon': isDarkMode === true,
+              'fa-sun': isDarkMode === false
+            }"></i>
+          </div>
+        </div>
+      </div>
+      <button class="nunito-sans-bold log-out">Log Out</button>
+    </div>
+  </header>
+}
