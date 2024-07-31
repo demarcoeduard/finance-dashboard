@@ -41,23 +41,17 @@ export class NavigationComponent implements OnInit{
       this.isDarkMode = false;
     }
 
-    this.router.events.subscribe(() => {
+    this.router.events.subscribe((event) => {
+      this.activatedRoute.firstChild?.data.subscribe(data => {
+        this.title = data['title'];
+        console.log(data)
+      });
       this.isOpen = false;
       this.updateNav();
+      console.log(event)
     });
-    this.updateNav();
 
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map(() => this.activatedRoute),
-      map(route => {
-        while (route.firstChild) route = route.firstChild;
-        return route;
-      }),
-      mergeMap(route => route.data)
-    ).subscribe(data => {
-      this.title = data['title'];
-    });
+    this.updateNav();
   }
 
   @HostListener('window:resize') updateNav() {
