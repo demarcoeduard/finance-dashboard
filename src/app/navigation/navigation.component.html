@@ -8,36 +8,44 @@
     <nav>
       <a routerLink="welcome" routerLinkActive="active" class="nunito-sans-bold link">Welcome</a>
       <a routerLink="dashboard" routerLinkActive="active" class="nunito-sans-bold link">Dashboard</a>
-      <div>
-        <a routerLink="main-accounts" routerLinkActive="active" class="nunito-sans-bold link">Accounts</a>
-        <a routerLink="main-accounts" class="sub-link">
-          <input type="radio" checked id="main-accounts" name="accounts">
-          <label for="main-accounts" class="nunito-sans-bold">Main</label>
-        </a>
-        <a routerLink="income-accounts" class="sub-link">
-          <input type="radio" id="income-accounts" name="accounts">
-          <label for="income-accounts" class="nunito-sans-bold">Income</label>
-        </a>
-        <a routerLink="expense-accounts" class="sub-link">
-          <input type="radio" id="expense-accounts" name="accounts">
-          <label for="expense-accounts" class="nunito-sans-bold">Expense</label>
-        </a>  
-      </div>
-      <div>
-        <a routerLink="transfer-transactions" routerLinkActive="active" class="nunito-sans-bold link">Transactions</a>
-        <a routerLink="transfer-transactions" class="sub-link">
-          <input type="radio" id="transfer-transactions" name="transactions">
-          <label for="transfer-transactions" class="nunito-sans-bold">Transfer</label>
-        </a>
-        <a routerLink="income-transactions" class="sub-link">
-          <input type="radio" id="income-transactions" name="transactions">
-          <label for="income-transactions" class="nunito-sans-bold">Income</label>
-        </a>
-        <a routerLink="expense-transactions" class="sub-link">
-          <input type="radio" id="expense-transactions" name="transactions">
-          <label for="expense-transactions" class="nunito-sans-bold">Expense</label>
-        </a>
-      </div>
+      <a 
+        routerLink="main-accounts" 
+        routerLinkActive="active" 
+        [class.on]="location === '/main-accounts' || location === '/income-accounts' || location === '/expense-accounts'" 
+        class="nunito-sans-bold link">
+        Accounts
+      </a>
+      <a routerLink="main-accounts" class="sub-link">
+        <input type="radio" [checked]="location === '/main-accounts'" id="main-accounts" name="accounts">
+        <label for="main-accounts" class="nunito-sans-bold">Main</label>
+      </a>
+      <a routerLink="income-accounts" class="sub-link">
+        <input type="radio" [checked]="location === '/income-accounts'" id="income-accounts" name="accounts">
+        <label for="income-accounts" class="nunito-sans-bold">Income</label>
+      </a>
+      <a routerLink="expense-accounts" class="sub-link">
+        <input type="radio" [checked]="location === '/expense-accounts'" id="expense-accounts" name="accounts">
+        <label for="expense-accounts" class="nunito-sans-bold">Expense</label>
+      </a>  
+      <a 
+        routerLink="transfer-transactions" 
+        routerLinkActive="active" 
+        [class.on]="location === '/transfer-transactions' || location === '/income-transactions' || location === '/expense-transactions'"
+        class="nunito-sans-bold link">
+        Transactions
+      </a>
+      <a routerLink="transfer-transactions" class="sub-link">
+        <input type="radio" [checked]="location === '/transfer-transactions'" id="transfer-transactions" name="transactions">
+        <label for="transfer-transactions" class="nunito-sans-bold">Transfer</label>
+      </a>
+      <a routerLink="income-transactions" class="sub-link">
+        <input type="radio" [checked]="location === '/income-transactions'" id="income-transactions" name="transactions">
+        <label for="income-transactions" class="nunito-sans-bold">Income</label>
+      </a>
+      <a routerLink="expense-transactions" class="sub-link">
+        <input type="radio" [checked]="location === '/expense-transactions'" id="expense-transactions" name="transactions">
+        <label for="expense-transactions" class="nunito-sans-bold">Expense</label>
+      </a>
     </nav>
     <div class="btn-container">
       <div class="btn" (click)="toggleTheme()">

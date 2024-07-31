@@ -1,7 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -28,7 +27,8 @@ export class NavigationComponent implements OnInit{
 
   isDarkMode = false;
   isOpen = true;
-  title:any = '';
+  title = '';
+  location = ''
 
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
@@ -44,13 +44,14 @@ export class NavigationComponent implements OnInit{
     this.router.events.subscribe((event) => {
       this.activatedRoute.firstChild?.data.subscribe(data => {
         this.title = data['title'];
-        console.log(data)
       });
       this.isOpen = false;
       this.updateNav();
-      console.log(event)
-    });
 
+      if (event instanceof NavigationEnd) {
+        this.location = event.url;
+      }
+    });
     this.updateNav();
   }
 
@@ -80,4 +81,5 @@ export class NavigationComponent implements OnInit{
     this.icon.nativeElement.classList.add(iconClass);
   }
 
+  
 }

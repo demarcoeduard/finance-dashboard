@@ -59,7 +59,7 @@ a {
   transition: all 0.3s;
 }
 
-.link:hover, .log-out:hover, .active {
+.link:hover, .log-out:hover, .active, .on {
   background-color: var(--main);
   color: #F7F9FC;
   cursor: pointer;
