@@ -28,7 +28,7 @@
       [disabled]="!form.valid">
       {{ isSignUp ? 'Sign Up' : 'Sign In' }}
     </button>
-    <p class="nunito-sans-regular">
+    <p class="nunito-sans-regular bottom-text">
       {{ isSignUp ? 'Already' : 'Don\'t' }} have an account? 
       <span class="nunito-sans-bold" tabindex="0" (click)="onChangeForm()" (keydown)="handleChangeForm($event)">
         {{ isSignUp ? 'Sign In' : 'Sign Up' }}
@@ -36,3 +36,12 @@
     </p>
   </form>
 </div>
+@if(isAlert) {
+  <div class="alert-container">
+    <div class="alert">
+      <i class="fa-solid fa-xmark" tabindex="1" (click)="onAlert()" (keydown)="handleAlert($event)"></i>
+      <p class="nunito-sans-bold alert-name">{{ alertName }}</p>
+      <p class="nunito-sans-regular alert-msg">{{ alertMessage }}</p>
+    </div>
+  </div>
+}

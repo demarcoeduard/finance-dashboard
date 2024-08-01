@@ -10,6 +10,9 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class AuthFormComponent {
   isSignUp = true;
+  isAlert = false;
+  alertName = 'Existing account';
+  alertMessage = 'An account with this email already exists. Please choose a different email or log in with the existing account.'
 
   onChangeForm() {
     this.isSignUp = !this.isSignUp;       
@@ -18,6 +21,16 @@ export class AuthFormComponent {
   handleChangeForm(event: KeyboardEvent) {
     if(event.key === 'Enter') {
       this.isSignUp = !this.isSignUp;       
+    }
+  }
+
+  onAlert() {
+    this.isAlert = !this.isAlert;
+  }
+
+  handleAlert(event: KeyboardEvent) {
+    if(event.key === 'Enter') {
+      this.onAlert();
     }
   }
 
