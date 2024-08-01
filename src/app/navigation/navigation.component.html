@@ -1,10 +1,10 @@
 <div class="small-header">
-  <i class="fa-solid fa-bars-staggered" (click)="toggleNav()"></i>
+  <i class="fa-solid fa-bars-staggered" tabindex="0" (keydown)="handleToggleNav($event)" (click)="onToggleNav()"></i>
   <p class="nunito-sans-bold title">{{ title }}</p>
 </div>
 @if(isOpen) {
   <header [@drawer]>
-    <i class="fa-solid fa-xmark" (click)="toggleNav()"></i>
+    <i class="fa-solid fa-xmark" tabindex="0" (keydown)="handleToggleNav($event)" (click)="onToggleNav()"></i>
     <nav>
       <a routerLink="welcome" routerLinkActive="active" class="nunito-sans-bold link">Welcome</a>
       <a routerLink="dashboard" routerLinkActive="active" class="nunito-sans-bold link">Dashboard</a>

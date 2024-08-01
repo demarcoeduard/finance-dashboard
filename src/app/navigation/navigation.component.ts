@@ -63,8 +63,14 @@ export class NavigationComponent implements OnInit{
     }
   }
 
-  toggleNav() {
+  onToggleNav() {
     this.isOpen = !this.isOpen;
+  }
+
+  handleToggleNav(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.onToggleNav();
+    }
   }
   
   onToggleTheme() {
