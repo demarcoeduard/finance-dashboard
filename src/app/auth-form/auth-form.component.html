@@ -1,9 +1,10 @@
 <div class="form-container">
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <h1>Sign Up</h1>
-    <div>
-      <label for="email">Email</label>
+    <h1 class="nunito-sans-bold">Sign Up</h1>
+    <div class="inputs-container">
+      <label class="nunito-sans-semibold" for="email">Email</label>
       <input 
+        class="nunito-sans-regular"
         type="text" 
         id="email" 
         placeholder="example@gmail.com"
@@ -11,8 +12,9 @@
         name="email"
         email
         required>
-      <label for="password">Password</label>
+      <label class="nunito-sans-semibold" for="password">Password</label>
       <input 
+        class="nunito-sans-regular"
         type="text" 
         id="password" 
         placeholder="password2024"
@@ -20,7 +22,7 @@
         name="password"
         required>
     </div>
-    <button type="submit" [disabled]="!form.valid">Sign Up</button>
-    <p>Already have an account? <span>Log In</span></p>
+    <button class="nunito-sans-bold" type="submit" [disabled]="!form.valid">Sign Up</button>
+    <p class="nunito-sans-regular">Already have an account? <span class="nunito-sans-bold">Log In</span></p>
   </form>
 </div>
