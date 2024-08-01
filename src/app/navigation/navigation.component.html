@@ -48,7 +48,7 @@
       </a>
     </nav>
     <div class="btn-container">
-      <div class="btn" tabindex="0" (click)="toggleTheme()" (keydown)="handleKeyDown($event)">
+      <div class="btn" tabindex="0" (click)="onToggleTheme()" (keydown)="handleToggleTheme($event)">
         <div #btn class="indicator" [class]="{'dark': isDarkMode === true}">
           <div class="icon-container">
             <i #icon [class]="{

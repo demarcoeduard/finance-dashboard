@@ -67,7 +67,7 @@ export class NavigationComponent implements OnInit{
     this.isOpen = !this.isOpen;
   }
   
-  toggleTheme() {
+  onToggleTheme() {
     document.documentElement.setAttribute('data-theme', this.isDarkMode ? 'light' : 'dark');
     this.isDarkMode = !this.isDarkMode;
     
@@ -81,9 +81,9 @@ export class NavigationComponent implements OnInit{
     this.icon.nativeElement.classList.add(iconClass);
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  handleToggleTheme(event: KeyboardEvent) {
     if(event.key === 'Enter') {
-      this.toggleTheme();
+      this.onToggleTheme();
     }
   }
   
