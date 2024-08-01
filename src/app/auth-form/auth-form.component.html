@@ -1,6 +1,6 @@
 <div class="form-container">
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <h1 class="nunito-sans-bold">Sign Up</h1>
+    <h1 class="nunito-sans-bold">{{ isSignUp ? 'Sign Up' : 'Sign In' }}</h1>
     <div class="inputs-container">
       <label class="nunito-sans-semibold" for="email">Email</label>
       <input 
@@ -22,7 +22,7 @@
         name="password"
         required>
     </div>
-    <button class="nunito-sans-bold" type="submit" [disabled]="!form.valid">Sign Up</button>
-    <p class="nunito-sans-regular">Already have an account? <span class="nunito-sans-bold">Log In</span></p>
+    <button class="nunito-sans-bold" type="submit" [disabled]="!form.valid">{{ isSignUp ? 'Sign Up' : 'Sign In' }}</button>
+    <p class="nunito-sans-regular">{{ isSignUp ? 'Already' : 'Don\'t' }} have an account? <span class="nunito-sans-bold" tabindex="0" (keydown)="onChangeForm($event)">{{ isSignUp ? 'Sign In' : 'Sign Up' }}</span></p>
   </form>
 </div>
