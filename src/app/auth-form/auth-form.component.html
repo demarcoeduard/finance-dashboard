@@ -1,14 +1,26 @@
 <div class="form-container">
-
-  <form>
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <h1>Sign Up</h1>
     <div>
       <label for="email">Email</label>
-      <input type="text" id="email" placeholder="example@gmail.com">
+      <input 
+        type="text" 
+        id="email" 
+        placeholder="example@gmail.com"
+        ngModel
+        name="email"
+        email
+        required>
       <label for="password">Password</label>
-      <input type="text" id="password" placeholder="examplepassword">
+      <input 
+        type="text" 
+        id="password" 
+        placeholder="password2024"
+        ngModel
+        name="password"
+        required>
     </div>
-    <button>Sign Up</button>
+    <button type="submit" [disabled]="!form.valid">Sign Up</button>
     <p>Already have an account? <span>Log In</span></p>
   </form>
 </div>
