@@ -1,1 +1,43 @@
-<p>dashboard works!</p>
+<div class="component-container">
+  <div class="dashboard-container">
+    <div class="info-container">
+      <div class="numbers-container">
+        <div>
+          <h1 class="nunito-sans-bold">SAVINGS</h1>
+          <h2 class="nunito-sans-regular">100.000.000</h2>
+        </div>
+        <div>
+          <h1 class="nunito-sans-bold">BUDGET</h1>
+          <h2 class="nunito-sans-regular">100.000.000</h2>
+        </div>
+      </div>
+      <div class="charts-container">
+        <div>
+          <h1 class="nunito-sans-bold">INCOME</h1>
+          @if(incomeLabels.length === 0) {
+            <p class="nunito-sans-bold chart-placeholder">To visualize the chart you must create a transaction!</p>
+          } @else {
+            <canvas baseChart [data]="income" [type]="'pie'"></canvas>
+          }
+        </div>
+        <div>
+          <h1 class="nunito-sans-bold">EXPENSE</h1>
+          @if(expenseLabels.length === 0) {
+            <p class="nunito-sans-bold chart-placeholder">To visualize the chart you must create a transaction!</p>
+          } @else {
+            <canvas baseChart [data]="expense" [type]="'pie'"></canvas>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="target-container">
+      <h1 class="nunito-sans-bold">TARGET</h1>
+      <div>
+        <h2 class="nunito-sans-regular">100%</h2>
+        <div class="percentage-container">
+          <div class="percentage" [style.height]="percentage"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
