@@ -81,5 +81,10 @@ export class NavigationComponent implements OnInit{
     this.icon.nativeElement.classList.add(iconClass);
   }
 
+  handleKeyDown(event: KeyboardEvent) {
+    if(event.key === 'Enter') {
+      this.toggleTheme();
+    }
+  }
   
 }
