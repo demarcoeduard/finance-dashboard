@@ -11,7 +11,11 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class AuthFormComponent {
   isSignUp = true;
 
-  onChangeForm(event: KeyboardEvent) {
+  onChangeForm() {
+    this.isSignUp = !this.isSignUp;       
+  }
+  
+  handleChangeForm(event: KeyboardEvent) {
     if(event.key === 'Enter') {
       this.isSignUp = !this.isSignUp;       
     }

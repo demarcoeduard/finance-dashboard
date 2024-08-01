@@ -30,7 +30,7 @@
     </button>
     <p class="nunito-sans-regular">
       {{ isSignUp ? 'Already' : 'Don\'t' }} have an account? 
-      <span class="nunito-sans-bold" tabindex="0" (keydown)="onChangeForm($event)">
+      <span class="nunito-sans-bold" tabindex="0" (click)="onChangeForm()" (keydown)="handleChangeForm($event)">
         {{ isSignUp ? 'Sign In' : 'Sign Up' }}
       </span>
     </p>
