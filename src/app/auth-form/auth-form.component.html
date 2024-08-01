@@ -22,7 +22,17 @@
         name="password"
         required>
     </div>
-    <button class="nunito-sans-bold" type="submit" [disabled]="!form.valid">{{ isSignUp ? 'Sign Up' : 'Sign In' }}</button>
-    <p class="nunito-sans-regular">{{ isSignUp ? 'Already' : 'Don\'t' }} have an account? <span class="nunito-sans-bold" tabindex="0" (keydown)="onChangeForm($event)">{{ isSignUp ? 'Sign In' : 'Sign Up' }}</span></p>
+    <button 
+      class="nunito-sans-bold" 
+      type="submit" 
+      [disabled]="!form.valid">
+      {{ isSignUp ? 'Sign Up' : 'Sign In' }}
+    </button>
+    <p class="nunito-sans-regular">
+      {{ isSignUp ? 'Already' : 'Don\'t' }} have an account? 
+      <span class="nunito-sans-bold" tabindex="0" (keydown)="onChangeForm($event)">
+        {{ isSignUp ? 'Sign In' : 'Sign Up' }}
+      </span>
+    </p>
   </form>
 </div>
