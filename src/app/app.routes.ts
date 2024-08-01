@@ -12,7 +12,7 @@ import { ExpenseTransactionsComponent } from './expense-transactions/expense-tra
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'welcome' },
   { path: 'welcome', component: WelcomeComponent, data: {title: 'Welcome'} },
-  { path: 'auth-form', component: AuthFormComponent },
+  { path: 'auth-form', component: AuthFormComponent, data: {title: 'Authentication'} },
   { path: 'dashboard', component: DashboardComponent, data: {title: 'Dashboard'} },
   { path: 'main-accounts', component: MainAccountsComponent, data: {title: 'Main'} },
   { path: 'income-accounts', component: IncomeAccountsComponent, data: {title: 'Income'} },
