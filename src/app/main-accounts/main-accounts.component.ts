@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-main-accounts',
@@ -10,8 +10,13 @@ import { FormsModule } from '@angular/forms';
 })
 export class MainAccountsComponent {
   popup = 0;
-  balance = 100000000;
-  targetBalance = 100000000;
+  formType = '';
+  savings = 100000000;
+  budget = 200000000;
+  goal = 300000000;
+  goalTarget = 100000000;
+  balance = 0;
+  targetBalance = 0;
 
   onShowPopup(id: number) {
     if (this.popup === id) {
@@ -21,7 +26,32 @@ export class MainAccountsComponent {
     }
   }
 
-  onSubmit() {
+  onOpenForm(formType: string) {
+    this.formType = formType;
+    if (formType === 'savings') {
+      this.balance = this.savings;
+    } else if (formType === 'budget') {
+      this.balance = this.budget;
+    } else {
+      this.balance = this.goal;
+      this.targetBalance = this.goalTarget;
+    }
+  }
 
+  onCloseForm() {
+    this.formType = '';
+  }
+
+  onSubmit(form: NgForm) {
+    if (this.formType === 'savings') {
+      this.savings = form.value.balance;
+    } else if (this.formType === 'budget') {
+      this.budget = form.value.balance;
+    } else {
+      this.goal = form.value.balance;
+      this.goalTarget = form.value.targetBalance;
+    }
+
+    this.onCloseForm();
   }
 }
