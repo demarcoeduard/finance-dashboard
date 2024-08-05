@@ -1,46 +1,52 @@
 <div class="section-button-container">
-  <button class="nunito-sans-bold manage-btn">Manage accounts</button>
-  <div class="popup section-popup">
-    <div class="popup-content">
-      <p class="nunito-sans-bold popup-text">savings</p>
-      <hr class="popup-hr">
-      <p class="nunito-sans-bold popup-text">budget</p>
-      <hr class="popup-hr">
-      <p class="nunito-sans-bold popup-text">goal</p>
+  <button class="nunito-sans-bold manage-btn" (click)="onShowPopup(1)">Manage accounts</button>
+  @if(popup === 1) {
+    <div class="popup section-popup">
+      <div class="popup-content">
+        <p class="nunito-sans-bold popup-text">savings</p>
+        <hr class="popup-hr">
+        <p class="nunito-sans-bold popup-text">budget</p>
+        <hr class="popup-hr">
+        <p class="nunito-sans-bold popup-text">goal</p>
+      </div>
     </div>
-  </div>
+  }
 </div>
 <div class="cards-container">
   <div class="card">
     <h1 class="nunito-sans-bold">SAVINGS</h1>
     <p class="nunito-sans-regular text">100.000.000</p>
     <div class="card-button-container">
-      <button class="nunito-sans-bold show-btn">Show transactions</button>
-      <div class="popup card-popup">
-        <div class="popup-content">
-          <p class="nunito-sans-bold popup-text">savings</p>
-          <hr class="popup-hr">
-          <p class="nunito-sans-bold popup-text">budget</p>
-          <hr class="popup-hr">
-          <p class="nunito-sans-bold popup-text">goal</p>
+      <button class="nunito-sans-bold show-btn" (click)="onShowPopup(2)">Show transactions</button>
+      @if(popup === 2) {
+        <div class="popup card-popup">
+          <div class="popup-content">
+            <p class="nunito-sans-bold popup-text">savings</p>
+            <hr class="popup-hr">
+            <p class="nunito-sans-bold popup-text">budget</p>
+            <hr class="popup-hr">
+            <p class="nunito-sans-bold popup-text">goal</p>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </div>
   <div class="card">
     <h1 class="nunito-sans-bold">BUDGET</h1>
     <p class="nunito-sans-regular text">100.000.000</p>
     <div class="card-button-container">
-      <button class="nunito-sans-bold show-btn">Show transactions</button>
-      <div class="popup card-popup">
-        <div class="popup-content">
-          <p class="nunito-sans-bold popup-text">savings</p>
-          <hr class="popup-hr">
-          <p class="nunito-sans-bold popup-text">budget</p>
-          <hr class="popup-hr">
-          <p class="nunito-sans-bold popup-text">goal</p>
+      <button class="nunito-sans-bold show-btn" (click)="onShowPopup(3)">Show transactions</button>
+      @if(popup === 3) {
+        <div class="popup card-popup">
+          <div class="popup-content">
+            <p class="nunito-sans-bold popup-text">savings</p>
+            <hr class="popup-hr">
+            <p class="nunito-sans-bold popup-text">budget</p>
+            <hr class="popup-hr">
+            <p class="nunito-sans-bold popup-text">goal</p>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </div>
   <div class="card">
@@ -51,16 +57,18 @@
       <p class="nunito-sans-regular text">100.000.000</p>
     </div>
     <div class="card-button-container">
-      <button class="nunito-sans-bold show-btn">Show transactions</button>
-      <div class="popup card-popup">
-        <div class="popup-content">
-          <p class="nunito-sans-bold popup-text">savings</p>
-          <hr class="popup-hr">
-          <p class="nunito-sans-bold popup-text">budget</p>
-          <hr class="popup-hr">
-          <p class="nunito-sans-bold popup-text">goal</p>
+      <button class="nunito-sans-bold show-btn" (click)="onShowPopup(4)">Show transactions</button>
+      @if(popup === 4) {
+        <div class="popup card-popup">
+          <div class="popup-content">
+            <p class="nunito-sans-bold popup-text">savings</p>
+            <hr class="popup-hr">
+            <p class="nunito-sans-bold popup-text">budget</p>
+            <hr class="popup-hr">
+            <p class="nunito-sans-bold popup-text">goal</p>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </div>
 </div>
