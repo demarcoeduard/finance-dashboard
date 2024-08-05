@@ -1,6 +1,11 @@
+.section-button-container {
+  margin: 60px 120px;
+  position: relative;
+}
+
 .manage-btn {
   display: flex;
-  margin: 60px auto 120px auto;
+  margin: auto;
   height: 80px;
   padding: 10px 20px;
   font-size: 45px;
@@ -48,7 +53,7 @@ h1 {
   margin: auto;
 }
 
-hr {
+.card-hr {
   border: 2px solid var(--secondary);
   border-radius: 50px;
 }
@@ -63,6 +68,50 @@ hr {
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 25%);
   cursor: pointer;
+}
+
+.popup {
+  width: 200px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 25%);
+  position: absolute;
+}
+
+.popup-content {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.popup::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  margin-left: -15px;
+  border-width: 15px;
+  border-style: solid;
+  border-color: transparent transparent var(--secondary);
+}
+
+.popup-hr {
+  border: 1px solid var(--primary);
+}
+
+.popup-text {
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.popup-text:hover {
+  background-color: var(--main);
+  color: #F7F9FC;
 }
 
 /* MEDIA QUERIES */
@@ -106,8 +155,11 @@ hr {
 }
 
 @media (width <= 1069px) {
+  .section-button-container {
+    margin: 60px;
+  }
+
   .manage-btn {
-    margin: 60px auto;
     height: 60px;
     font-size: 30px;
   }
