@@ -72,3 +72,35 @@
     </div>
   </div>
 </div>
+@if(true) {
+  <div class="form-container">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <i class="fa-solid fa-xmark"></i>
+      <div class="form-inputs">
+        <label class="nunito-sans-semibold" for="balance">Balance</label>
+        <input 
+          class="nunito-sans-regular"
+          type="number" 
+          id="balance" 
+          min="0"
+          max="999999999"
+          [(ngModel)]="balance" 
+          name="balance"
+          required>
+        @if(true) {
+          <label class="nunito-sans-semibold" for="target-balance">Target balance</label>
+          <input 
+            class="nunito-sans-regular"
+            type="number" 
+            id="target-balance" 
+            min="0" 
+            max="999999999"
+            [(ngModel)]="targetBalance"
+            name="targetBalance"
+            required>
+        }
+      </div>
+      <button type="submit" [disabled]="!form.valid" class="form-btn nunito-sans-bold">Save changes</button>
+    </form>
+  </div>
+}
