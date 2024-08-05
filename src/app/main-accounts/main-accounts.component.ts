@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-accounts',
@@ -17,6 +18,7 @@ export class MainAccountsComponent {
   goalTarget = 100000000;
   balance = 0;
   targetBalance = 0;
+  router = inject(Router);
 
   onShowPopup(id: number) {
     if (this.popup === id) {
@@ -40,6 +42,27 @@ export class MainAccountsComponent {
 
   onCloseForm() {
     this.formType = '';
+  }
+
+  onShowTransfers(name: string) {
+    const navigationExtras: NavigationExtras = {
+      state: { data: name}
+    };
+    this.router.navigate(['/transfer-transactions'], navigationExtras);
+  }
+
+  onShowIncomes(name: string) {
+    const navigationExtras: NavigationExtras = {
+      state: { data: name }
+    };
+    this.router.navigate(['/income-transactions'], navigationExtras);
+  }
+
+  onShowExpenses(name: string) {
+    const navigationExtras: NavigationExtras = {
+      state: { data: name }
+    };
+    this.router.navigate(['/expense-transactions'], navigationExtras);
   }
 
   onSubmit(form: NgForm) {

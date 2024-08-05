@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transfer-transactions',
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
   templateUrl: './transfer-transactions.component.html',
   styleUrl: './transfer-transactions.component.css'
 })
-export class TransferTransactionsComponent {
+export class TransferTransactionsComponent{
+  search = '';
+  router = inject(Router);
 
+  constructor() {
+    this.search = this.router.getCurrentNavigation()?.extras.state?.['data'];
+  }
 }

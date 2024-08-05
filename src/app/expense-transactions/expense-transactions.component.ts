@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-expense-transactions',
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './expense-transactions.component.css'
 })
 export class ExpenseTransactionsComponent {
+  search = '';
+  router = inject(Router);
 
+  constructor() {
+    this.search = this.router.getCurrentNavigation()?.extras.state?.['data'];
+  }
 }

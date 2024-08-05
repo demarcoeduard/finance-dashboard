@@ -21,11 +21,11 @@
       @if(popup === 2) {
         <div class="popup card-popup">
           <div class="popup-content">
-            <p class="nunito-sans-bold popup-text">savings</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowTransfers('savings')">transfer</p>
             <hr class="popup-hr">
-            <p class="nunito-sans-bold popup-text">budget</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowIncomes('savings')">income</p>
             <hr class="popup-hr">
-            <p class="nunito-sans-bold popup-text">goal</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowExpenses('savings')">expense</p>
           </div>
         </div>
       }
@@ -39,11 +39,11 @@
       @if(popup === 3) {
         <div class="popup card-popup">
           <div class="popup-content">
-            <p class="nunito-sans-bold popup-text">savings</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowTransfers('budget')">transfer</p>
             <hr class="popup-hr">
-            <p class="nunito-sans-bold popup-text">budget</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowIncomes('budget')">income</p>
             <hr class="popup-hr">
-            <p class="nunito-sans-bold popup-text">goal</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowExpenses('budget')">expense</p>
           </div>
         </div>
       }
@@ -61,11 +61,11 @@
       @if(popup === 4) {
         <div class="popup card-popup">
           <div class="popup-content">
-            <p class="nunito-sans-bold popup-text">savings</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowTransfers('goal')">transfer</p>
             <hr class="popup-hr">
-            <p class="nunito-sans-bold popup-text">budget</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowIncomes('goal')">income</p>
             <hr class="popup-hr">
-            <p class="nunito-sans-bold popup-text">goal</p>
+            <p class="nunito-sans-bold popup-text" (click)="onShowExpenses('goal')">expense</p>
           </div>
         </div>
       }
