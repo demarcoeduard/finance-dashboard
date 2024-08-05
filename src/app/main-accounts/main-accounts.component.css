@@ -38,7 +38,7 @@ h1 {
   color: var(--secondary);
 }
 
-p {
+.text {
   font-size: 60px;
   color: var(--secondary);
 }
@@ -95,7 +95,7 @@ hr {
     font-size: 40px;
   }
   
-  p {
+  .text {
     font-size: 50px;
   }
   
@@ -125,7 +125,7 @@ hr {
     font-size: 35px;
   }
   
-  p {
+  .text {
     font-size: 40px;
   }
   
