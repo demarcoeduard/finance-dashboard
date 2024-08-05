@@ -1,0 +1,148 @@
+.manage-btn {
+  display: flex;
+  margin: 60px auto 120px auto;
+  height: 80px;
+  padding: 10px 20px;
+  font-size: 45px;
+  color: #F7F9FC;
+  background-color: var(--main);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 25%);
+  cursor: pointer;
+}
+
+.cards-container {
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  max-width: 1470px;
+  padding: 0px 30px;
+}
+
+.card {
+  width: 450px;
+  height: 500px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border: 3px solid var(--main);
+  border-radius: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 25%);
+}
+
+h1 {
+  font-size: 50px;
+  color: var(--secondary);
+}
+
+p {
+  font-size: 60px;
+  color: var(--secondary);
+}
+
+.goal {
+  width: fit-content;
+  margin: auto;
+}
+
+hr {
+  border: 2px solid var(--secondary);
+  border-radius: 50px;
+}
+
+.show-btn {
+  height: 80px;
+  padding: 10px 20px;
+  font-size: 35px;
+  color: #F7F9FC;
+  background-color: var(--main);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 25%);
+  cursor: pointer;
+}
+
+/* MEDIA QUERIES */
+@media (width <= 1729px) {
+  .cards-container {
+    max-width: 1320px;
+  }
+  
+  .card {
+    width: 400px;
+  }
+}
+
+@media (width <= 1629px) {
+  .manage-btn {
+    height: 70px;
+    font-size: 40px;
+  }
+  
+  .cards-container {
+    max-width: 1170px;
+    padding: 0px 5px;
+  }
+  
+  .card {
+    width: 350px;
+  }
+  
+  h1 {
+    font-size: 40px;
+  }
+  
+  p {
+    font-size: 50px;
+  }
+  
+  .show-btn {
+    height: 70px;
+    font-size: 25px;
+  }
+}
+
+@media (width <= 1069px) {
+  .manage-btn {
+    margin: 60px auto;
+    height: 60px;
+    font-size: 30px;
+  }
+  
+  .cards-container {
+    max-width: 950px;
+  }
+  
+  .card {
+    width: 300px;
+    height: 400px;
+  }
+  
+  h1 {
+    font-size: 35px;
+  }
+  
+  p {
+    font-size: 40px;
+  }
+  
+  .show-btn {
+    height: 60px;
+    font-size: 20px;
+  }
+}
+
+@media (width <= 919px) {
+  .cards-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .card {
+    margin-bottom: 60px;
+  }
+}
