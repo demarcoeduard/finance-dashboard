@@ -15,7 +15,7 @@
 <div class="cards-container">
   <div class="card">
     <h1 class="nunito-sans-bold">SAVINGS</h1>
-    <p class="nunito-sans-regular text">{{ savings }}</p>
+    <p class="nunito-sans-regular text">{{ savings | number }}</p>
     <div class="card-button-container">
       <button class="nunito-sans-bold show-btn" (click)="onShowPopup(2)">Show transactions</button>
       @if(popup === 2) {
@@ -33,7 +33,7 @@
   </div>
   <div class="card">
     <h1 class="nunito-sans-bold">BUDGET</h1>
-    <p class="nunito-sans-regular text">{{ budget }}</p>
+    <p class="nunito-sans-regular text">{{ budget | number }}</p>
     <div class="card-button-container">
       <button class="nunito-sans-bold show-btn" (click)="onShowPopup(3)">Show transactions</button>
       @if(popup === 3) {
@@ -52,9 +52,9 @@
   <div class="card">
     <h1 class="nunito-sans-bold">GOAL</h1>
     <div class="goal">
-      <p class="nunito-sans-regular text">{{ goal }}</p>
+      <p class="nunito-sans-regular text">{{ goal | number }}</p>
       <hr class="card-hr">
-      <p class="nunito-sans-regular text">{{ goalTarget }}</p>
+      <p class="nunito-sans-regular text">{{ goalTarget | number }}</p>
     </div>
     <div class="card-button-container">
       <button class="nunito-sans-bold show-btn" (click)="onShowPopup(4)">Show transactions</button>

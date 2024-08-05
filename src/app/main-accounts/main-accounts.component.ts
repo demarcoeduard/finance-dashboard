@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
@@ -5,7 +6,7 @@ import { NavigationExtras, Router } from '@angular/router';
 @Component({
   selector: 'app-main-accounts',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, DecimalPipe],
   templateUrl: './main-accounts.component.html',
   styleUrl: './main-accounts.component.css'
 })
