@@ -1,6 +1,5 @@
 .form-container {
   width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
 }
@@ -83,7 +82,7 @@ span {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 100vh;
+  padding-left: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,12 +121,18 @@ i {
   color: var(--secondary);
 }
 
-
 /* MEDIA QUERIES */
+@media (width <= 1479px) {
+  .alert-container {
+    padding-left: 200px;
+  }
+}
+
 @media (width <= 1279px) {
   form {
     width: 500px;
     padding: 30px;
+    margin-top: 60px;
   }
   
   h1 {
@@ -154,6 +159,9 @@ i {
   }
 
   /* ALERT STYLES */
+  .alert-container {
+    padding-left: 0px;
+  }
   .alert {
     width: 500px;
     padding: 30px;
