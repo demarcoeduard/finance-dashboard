@@ -1,1 +1,67 @@
-<p>expense-accounts works!</p>
+<button class="nunito-sans-bold section-btn" (click)="onOpenForm('create')">Create account</button>
+<div class="table-container">
+  <table>
+    <tr class="nunito-sans-bold header">
+      <th class="account">Acount</th>
+      <th>Balance</th>
+      <th class="actions">Actions</th>
+    </tr>
+    @for(account of accounts; track account.name; let idx = $index) {
+      <tr class="nunito-sans-semibold row">
+        <td class="account">{{ account.name }}</td>
+        <td>{{ account.balance | number }}</td>
+        <td>
+          <i class="fa-solid fa-ellipsis" (click)="onShowActions(idx)"></i>
+          @if(idx === accountIdx) {
+            <div class="popup">
+              <div class="popup-content">
+                <p class="nunito-sans-bold popup-text" (click)="onShowTransactions()">show transactions</p>
+                <hr>
+                <p class="nunito-sans-bold popup-text" (click)="onOpenForm('edit')">edit account</p>
+                <hr>
+                <p class="nunito-sans-bold popup-text" (click)="onOpenAlert()">delete account</p>
+              </div>
+            </div>
+          }
+        </td>
+      </tr>
+    }
+  </table>
+</div>
+@if(formType === 'edit' || formType === 'create') {
+  <div class="form-container">
+    <form>
+      <i class="fa-solid fa-xmark" (click)="onOpenForm('')"></i>
+      <div class="inputs-container">
+        <label class="nunito-sans-semibold" for="name">Name</label>
+        <input class="nunito-sans-regular" type="text" id="name">
+        <label class="nunito-sans-semibold" for="balance">Balance</label>
+        <input class="nunito-sans-regular" type="text" id="balance">
+      </div>
+      <button class="nunito-sans-bold normal-btn">{{ formType === 'create' ? 'Create account' : 'Save changes' }}</button>
+    </form>
+  </div>
+}
+@if(alertType === 'existing' || alertType === 'deletion') {
+  <div class="alert-container">
+    <div class="alert">
+      @if(alertType === 'existing'){
+        <i class="fa-solid fa-xmark" (click)="onCloseAlert()"></i>
+      }
+      <p class="nunito-sans-bold alert-name">{{ alertType === 'existing' ? 'Existing account' : 'Account deletion' }}</p>
+      <p class="nunito-sans-regular alert-msg">
+        {{ alertType === 'existing' 
+          ? 'An account with the chosen name already exists. Please select a different name to proceed.' 
+          : 'All data regarding this account, including old transactions and graph data will also be deleted!' 
+        }}
+      </p>
+      @if(alertType === 'deletion') {
+        <div class="btns-container">
+          <button class="nunito-sans-bold normal-btn" (click)="onCloseAlert()">Close</button>
+          <button class="nunito-sans-bold normal-btn" (click)="onDeleteAccount()">Delete</button>
+        </div>
+      }
+    </div>
+  </div>
+}
+
