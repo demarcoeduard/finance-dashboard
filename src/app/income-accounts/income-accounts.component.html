@@ -28,4 +28,30 @@
     }
   </table>
 </div>
-
+@if(!true) {
+  <div class="form-container">
+    <form>
+      <i class="fa-solid fa-xmark"></i>
+      <div class="inputs-container">
+        <label class="nunito-sans-semibold" for="name">Name</label>
+        <input class="nunito-sans-regular" type="text" id="name">
+        <label class="nunito-sans-semibold" for="balance">Balance</label>
+        <input class="nunito-sans-regular" type="text" id="balance">
+      </div>
+      <button class="nunito-sans-bold normal-btn">Save changes</button>
+    </form>
+  </div>
+}
+@if(true) {
+  <div class="alert-container">
+    <div class="alert">
+      <i class="fa-solid fa-xmark"></i>
+      <p class="nunito-sans-bold alert-name">Account deletion</p>
+      <p class="nunito-sans-regular alert-msg">All data regarding this account, including old transactions and graph data will also be deleted!</p>
+      <div class="btns-container">
+        <button class="nunito-sans-bold normal-btn">Close</button>
+        <button class="nunito-sans-bold normal-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+}
