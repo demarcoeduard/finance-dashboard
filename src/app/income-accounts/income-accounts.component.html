@@ -1,1 +1,31 @@
-<p>income-accounts works!</p>
+<button class="nunito-sans-bold section-btn">Create account</button>
+<div class="table-container">
+  <table>
+    <tr class="nunito-sans-bold header">
+      <th class="account">Acount</th>
+      <th>Balance</th>
+      <th>Actions</th>
+    </tr>
+    @for(account of accounts; track account.name; let idx = $index) {
+      <tr class="nunito-sans-semibold row">
+        <td class="account">{{ account.name }}</td>
+        <td>{{ account.balance | number }}</td>
+        <td>
+          <i class="fa-solid fa-ellipsis"></i>
+          @if(!true) {
+            <div class="popup">
+              <div class="popup-content">
+                <p class="nunito-sans-bold popup-text">show transactions</p>
+                <hr>
+                <p class="nunito-sans-bold popup-text">edit account</p>
+                <hr>
+                <p class="nunito-sans-bold popup-text">delete account</p>
+              </div>
+            </div>
+          }
+        </td>
+      </tr>
+    }
+  </table>
+</div>
+
