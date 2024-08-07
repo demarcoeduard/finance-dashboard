@@ -172,6 +172,10 @@ input {
   cursor: pointer;
 }
 
+.form-btn:disabled {
+  opacity: 50%;
+}
+
 .alert-container {
   position: fixed;
   top: 0;

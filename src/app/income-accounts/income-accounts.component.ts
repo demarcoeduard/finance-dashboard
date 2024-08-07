@@ -1,11 +1,12 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-income-accounts',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, FormsModule],
   templateUrl: './income-accounts.component.html',
   styleUrl: './income-accounts.component.css'
 })
@@ -74,6 +75,25 @@ export class IncomeAccountsComponent {
 
   onOpenForm(type: string) {
     this.formType = type;
+  }
+
+  onSubmit(form: NgForm) {
+    let name:string = form.value.name;
+    let balance:number = form.value.balance;
+
+    if(this.formType === 'create') {
+      this.accounts.push(
+        {
+          name: name,
+          balance: balance
+        }
+      )
+    } else {
+      this.accounts[this.accountIdx!].name = name;
+      this.accounts[this.accountIdx!].balance = balance;
+    }
+
+    this.onOpenForm('');
     this.onShowActions(null);
   }
 }
