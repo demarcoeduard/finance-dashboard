@@ -17,8 +17,8 @@ table {
   width: 1420px;
   margin: auto;
   margin-bottom: 60px;
-  border-radius: 15px 15px 0px 0px;
   border-collapse: collapse;
+  border-radius: 15px 15px 0px 0px;
   overflow: hidden;
   text-align: right;
   box-shadow: 0 0 5px rgba(0, 0, 0, 25%);
