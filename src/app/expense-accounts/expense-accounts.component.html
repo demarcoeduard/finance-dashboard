@@ -30,15 +30,33 @@
 </div>
 @if(formType === 'edit' || formType === 'create') {
   <div class="form-container">
-    <form>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
       <i class="fa-solid fa-xmark" (click)="onOpenForm('')"></i>
       <div class="inputs-container">
         <label class="nunito-sans-semibold" for="name">Name</label>
-        <input class="nunito-sans-regular" type="text" id="name">
+        <input 
+          class="nunito-sans-regular" 
+          type="text" 
+          id="name"
+          ngModel
+          name="name"
+          required>
         <label class="nunito-sans-semibold" for="balance">Balance</label>
-        <input class="nunito-sans-regular" type="text" id="balance">
+        <input 
+          class="nunito-sans-regular" 
+          type="number"
+          min="0"
+          max="999999999" 
+          id="balance"
+          ngModel
+          name="balance"
+          required>
       </div>
-      <button class="nunito-sans-bold normal-btn">{{ formType === 'create' ? 'Create account' : 'Save changes' }}</button>
+      <button 
+        class="nunito-sans-bold normal-btn form-btn"
+        [disabled]="!form.valid">
+        {{ formType === 'create' ? 'Create account' : 'Save changes' }}
+      </button>
     </form>
   </div>
 }
@@ -64,4 +82,3 @@
     </div>
   </div>
 }
-
