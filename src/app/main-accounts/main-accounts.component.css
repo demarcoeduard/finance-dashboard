@@ -266,6 +266,7 @@ input {
 @media (width <= 1279px) {
   .form-container {
     padding-left: 0px;
+    padding: 30px;
   }
   
   form {
