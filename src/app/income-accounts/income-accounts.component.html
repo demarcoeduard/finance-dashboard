@@ -38,7 +38,7 @@
           class="nunito-sans-regular" 
           type="text" 
           id="name"
-          ngModel
+          [(ngModel)]="accountName"
           name="name"
           required>
         <label class="nunito-sans-semibold" for="balance">Balance</label>
@@ -48,7 +48,7 @@
           min="0"
           max="999999999" 
           id="balance"
-          ngModel
+          [(ngModel)]="accountBalance"
           name="balance"
           required>
       </div>

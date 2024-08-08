@@ -13,6 +13,8 @@ import { NavigationExtras, Router } from '@angular/router';
 export class IncomeAccountsComponent {
   formType = '';
   alertType = '';
+  accountName = '';
+  accountBalance!:number;
   accountIdx: null|number = null;
   router = inject(Router);
   accounts = [
@@ -74,7 +76,16 @@ export class IncomeAccountsComponent {
   }
 
   onOpenForm(type: string) {
+    if (type === 'create') {
+      this.onShowActions(null);
+      this.accountName = '';
+      this.accountBalance = NaN; 
+    }
+    
     this.formType = type;
+
+    this.accountName = this.accounts[this.accountIdx!].name;
+    this.accountBalance = this.accounts[this.accountIdx!].balance;
   }
 
   onSubmit(form: NgForm) {
