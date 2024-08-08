@@ -195,7 +195,7 @@ label {
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
-  gap: 100px;
+  gap: 10%;
 }
 
 /* MEDIA QUERIES */
