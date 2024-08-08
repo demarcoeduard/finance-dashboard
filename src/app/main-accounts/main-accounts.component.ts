@@ -43,6 +43,7 @@ export class MainAccountsComponent {
 
   onCloseForm() {
     this.formType = '';
+    this.popup = 0;
   }
 
   onShowTransfers(name: string) {
