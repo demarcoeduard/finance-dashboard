@@ -1,5 +1,5 @@
 <div class="actions-container">
-  <button class="nunito-sans-bold section-btn">Create transaction</button>
+  <button class="nunito-sans-bold section-btn" (click)="onOpenForm()">Create transaction</button>
   <input class="nunito-sans-semibold search-input" type="text" placeholder="Search...">
 </div>
 <div class="table-container">
@@ -10,7 +10,7 @@
       <th>Receiver</th>
     </tr>
     @for(transaction of transactions; track transaction.source; let idx = $index) {
-      <tr class="nunito-sans-semibold row" title="Click to delete transaction">
+      <tr class="nunito-sans-semibold row" title="Click to delete transaction" (click)="onOpenAlert(idx)">
         <td>{{ transaction.source }}</td>
         <td>{{ transaction.amount | number }}</td>
         <td>{{ transaction.receiver }}</td>
@@ -18,10 +18,10 @@
     }
   </table>
 </div>
-@if(!true) {
+@if(isOpen === true) {
   <div class="form-container">
     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-      <i class="fa-solid fa-xmark"></i>
+      <i class="fa-solid fa-xmark" (click)="onOpenForm()"></i>
       <div class="inputs-container">
         <label class="nunito-sans-semibold" for="source">Source</label>
         <input 
@@ -58,20 +58,23 @@
     </form>
   </div>
 }
-@if(!true) {
+@if(alertType === 'funds' || alertType === 'account') {
   <div class="alert-container">
     <div class="alert">
-      @if(true){
-        <i class="fa-solid fa-xmark"></i>
-      }
-      <p class="nunito-sans-bold alert-name">Insufficient funds</p>
+      <i class="fa-solid fa-xmark" (click)="onCloseAlert()"></i>
+      <p class="nunito-sans-bold alert-name">
+        {{ alertType === 'funds' ? 'Insufficient funds' : 'Receiver account' }}
+      </p>
       <p class="nunito-sans-regular alert-msg">
-        The amount you want to transfer exceeds your current balance. Please enter a lower amount to proceed.
+        {{ alertType === 'funds' 
+        ? 'The amount you want to transfer exceeds your current balance. Please enter a lower amount to proceed.' 
+        : 'The source and receiver accounts are the same. Please choose a different receiver account to proceed.' 
+      }}
       </p>
     </div>
   </div>
 }
-@if(!true) {
+@if(deleteAlert === true) {
   <div class="alert-container">
     <div class="alert">
       <p class="nunito-sans-bold alert-name">Transaction deletion</p>
@@ -79,8 +82,8 @@
         Deleting this transaction will reverse it. The amount will be returned to the original account.
       </p>
       <div class="btns-container">
-        <button class="nunito-sans-bold normal-btn">Close</button>
-        <button class="nunito-sans-bold normal-btn">Delete</button>
+        <button class="nunito-sans-bold normal-btn" (click)="onOpenAlert(null)">Close</button>
+        <button class="nunito-sans-bold normal-btn" (click)="onDelete()">Delete</button>
       </div>
     </div>
   </div>

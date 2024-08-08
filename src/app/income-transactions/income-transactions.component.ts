@@ -45,12 +45,46 @@ export class IncomeTransactionsComponent {
   ];
   search = '';
   router = inject(Router);
+  alertType = '';
+  deleteAlert = false;
+  transactionIdx:number|null = NaN;
+  isOpen = false;
 
   constructor() {
     this.search = this.router.getCurrentNavigation()?.extras.state?.['data'];
   }
 
+  onOpenAlert(idx: number|null) {
+    this.deleteAlert = !this.deleteAlert;
+    this.transactionIdx = idx;
+  }
+
+  onDelete() {
+    this.transactions.splice(this.transactionIdx!, 1);
+    this.onOpenAlert(NaN);
+  }
+
+  onCloseAlert() {
+    this.alertType = '';
+  }
+
+  onOpenForm() {
+    this.isOpen = !this.isOpen;
+  }
+
   onSubmit(form: NgForm) {
-    
+    let source = form.value.source;
+    let amount = form.value.amount;
+    let receiver = form.value.receiver;
+
+    this.transactions.push(
+      {
+        source: source,
+        amount: amount,
+        receiver: receiver
+      }
+    );
+
+    this.onOpenForm();
   }
 }
