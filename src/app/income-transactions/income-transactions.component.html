@@ -1,6 +1,6 @@
 <div class="actions-container">
   <button class="nunito-sans-bold section-btn" (click)="onOpenForm()">Create transaction</button>
-  <input class="nunito-sans-semibold search-input" type="text" placeholder="Search...">
+  <input class="nunito-sans-semibold search-input" type="text" placeholder="Search..." [(ngModel)]="search">
 </div>
 <div class="table-container">
   <table>
@@ -9,7 +9,7 @@
       <th>Amount</th>
       <th>Receiver</th>
     </tr>
-    @for(transaction of transactions; track transaction.source; let idx = $index) {
+    @for(transaction of transactions | filter:search ; track transaction.source; let idx = $index) {
       <tr class="nunito-sans-semibold row" title="Click to delete transaction" (click)="onOpenAlert(idx)">
         <td>{{ transaction.source }}</td>
         <td>{{ transaction.amount | number }}</td>

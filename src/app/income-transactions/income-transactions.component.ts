@@ -2,11 +2,12 @@ import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FilterPipe } from '../filter.pipe';
 
 @Component({
   selector: 'app-income-transactions',
   standalone: true,
-  imports: [DecimalPipe, FormsModule],
+  imports: [DecimalPipe, FormsModule, FilterPipe],
   templateUrl: './income-transactions.component.html',
   styleUrl: './income-transactions.component.css'
 })
