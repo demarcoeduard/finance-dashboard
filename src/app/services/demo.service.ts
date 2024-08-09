@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Data } from './data.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DemoService {
-  demo = {
+  private demo:Data = {
     accounts: {
       main: {
-        saving: {
+        savings: {
           balance: 5000
         },
         budget: {
@@ -74,102 +76,105 @@ export class DemoService {
     transactions: {
       transfer: [
         {
-          source: 'saving',
+          source: 'Savings',
           amount: 500,
-          receiver: 'budget'
+          receiver: 'Budget'
         },
         {
-          source: 'budget',
+          source: 'Budget',
           amount: 200,
-          receiver: 'saving'
+          receiver: 'Savings'
         },
         {
-          source: 'budget',
+          source: 'Budget',
           amount: 300,
-          receiver: 'goal'
+          receiver: 'Goal'
         },
         {
-          source: 'goal',
+          source: 'Goal',
           amount: 100,
-          receiver: 'saving'
+          receiver: 'Savings'
         },
         {
-          source: 'saving',
+          source: 'Savings',
           amount: 1000,
-          receiver: 'goal'
+          receiver: 'Goal'
         },
         {
-          source: 'budget',
+          source: 'Budget',
           amount: 500,
-          receiver: 'saving'
+          receiver: 'Savings'
         }
       ],
       income: [
         {
           source: 'Salary',
           amount: 3000,
-          receiver: 'saving'
+          receiver: 'Savings'
         },
         {
           source: 'Freelance',
           amount: 1500,
-          receiver: 'budget'
+          receiver: 'Budget'
         },
         {
           source: 'Investment Returns',
           amount: 1000,
-          receiver: 'goal'
+          receiver: 'Goal'
         },
         {
           source: 'Rental Income',
           amount: 1200,
-          receiver: 'saving'
+          receiver: 'Savings'
         },
         {
           source: 'Side Business',
           amount: 800,
-          receiver: 'budget'
+          receiver: 'Budget'
         },
         {
           source: 'Dividends',
           amount: 600,
-          receiver: 'goal'
+          receiver: 'Goal'
         }
       ],
       expense: [
         {
-          source: 'budget',
+          source: 'Budget',
           amount: 1200,
           receiver: 'Rent'
         },
         {
-          source: 'saving',
+          source: 'Savings',
           amount: 400,
           receiver: 'Groceries'
         },
         {
-          source: 'budget',
+          source: 'Budget',
           amount: 250,
           receiver: 'Utilities'
         },
         {
-          source: 'saving',
+          source: 'Savings',
           amount: 150,
           receiver: 'Transportation'
         },
         {
-          source: 'budget',
+          source: 'Budget',
           amount: 300,
           receiver: 'Insurance'
         },
         {
-          source: 'saving',
+          source: 'Savings',
           amount: 200,
           receiver: 'Entertainment'
         }
       ]
     }
-  };  
+  };
+  private demoSubject = new BehaviorSubject(this.demo);
+  public demo$ = this.demoSubject.asObservable();  
 
   constructor() { }
+
 }
