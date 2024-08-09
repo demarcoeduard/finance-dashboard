@@ -2,6 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
+import { DemoService } from '../services/demo.service';
 
 @Component({
   selector: 'app-main-accounts',
@@ -20,6 +21,7 @@ export class MainAccountsComponent {
   balance = 0;
   targetBalance = 0;
   router = inject(Router);
+  demoService = inject(DemoService);
 
   onShowPopup(id: number) {
     if (this.popup === id) {
