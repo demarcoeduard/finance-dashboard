@@ -48,25 +48,22 @@ export class MainAccountsComponent {
     this.popup = 0;
   }
 
-  onShowTransfers(name: string) {
-    const navigationExtras: NavigationExtras = {
-      state: { data: name}
-    };
-    this.router.navigate(['/transfer-transactions'], navigationExtras);
-  }
+  onShowTransactions(name: string, type: string) {
+    let path = '';
 
-  onShowIncomes(name: string) {
+    if (type === 'transfer') {
+      path = '/transfer-transactions';
+    } else if (type === 'income') {
+      path = '/income-transactions';
+    } else {
+      path = '/expense-transactions';
+    }
+
     const navigationExtras: NavigationExtras = {
       state: { data: name }
     };
-    this.router.navigate(['/income-transactions'], navigationExtras);
-  }
 
-  onShowExpenses(name: string) {
-    const navigationExtras: NavigationExtras = {
-      state: { data: name }
-    };
-    this.router.navigate(['/expense-transactions'], navigationExtras);
+    this.router.navigate([path], navigationExtras);
   }
 
   onSubmit(form: NgForm) {
