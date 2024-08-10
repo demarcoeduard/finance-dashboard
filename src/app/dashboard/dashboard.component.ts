@@ -68,6 +68,6 @@ export class DashboardComponent implements OnInit {
   }
 
   calcPercentage(balance: number, target: number) {
-    return (100 * balance) / target;
+    return Math.floor((100 * balance) / target);
   }
 }
