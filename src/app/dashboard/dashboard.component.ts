@@ -31,38 +31,40 @@ export class DashboardComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   
   ngOnInit(): void {
-    this.subscription = this.demoService.demo$.subscribe(demoData => this.data = demoData);
+    this.subscription = this.demoService.demo$.subscribe(demoData => {
+      this.data = demoData;
 
-    let main = this.data.accounts.main;
-    let income = this.data.accounts.income;
-    let expense = this.data.accounts.expense;
-
-    this.savings = main.savings.balance;
-    this.budget = main.budget.balance;
-    this.percentage = this.calcPercentage(main.goal.balance, main.goal.target);
-
-    this.incomeLabels = income.map(v => v.name);
-    this.incomeData = income.map(v => v.balance);
-    this.expenseLabels = expense.map(v => v.name);
-    this.expenseData = expense.map(v => v.balance);
-
-    this.income = {
-      labels: this.incomeLabels,
-      datasets: [{
-        label: 'Income',
-        data: this.incomeData,
-        hoverOffset: 10
-      }]
-    };
-
-    this.expense = {
-      labels: this.expenseLabels,
-      datasets: [{
-        label: 'Expense',
-        data: this.expenseData,
-        hoverOffset: 10
-      }]
-    };
+      let main = this.data.accounts.main;
+      let income = this.data.accounts.income;
+      let expense = this.data.accounts.expense;
+  
+      this.savings = main.savings.balance;
+      this.budget = main.budget.balance;
+      this.percentage = this.calcPercentage(main.goal.balance, main.goal.target);
+  
+      this.incomeLabels = income.map(v => v.name);
+      this.incomeData = income.map(v => v.balance);
+      this.expenseLabels = expense.map(v => v.name);
+      this.expenseData = expense.map(v => v.balance);
+  
+      this.income = {
+        labels: this.incomeLabels,
+        datasets: [{
+          label: 'Income',
+          data: this.incomeData,
+          hoverOffset: 10
+        }]
+      };
+  
+      this.expense = {
+        labels: this.expenseLabels,
+        datasets: [{
+          label: 'Expense',
+          data: this.expenseData,
+          hoverOffset: 10
+        }]
+      };
+    });
 
     this.destroyRef.onDestroy(() => this.subscription.unsubscribe());
   }
