@@ -68,6 +68,12 @@ export class DashboardComponent implements OnInit {
   }
 
   calcPercentage(balance: number, target: number) {
-    return Math.floor((100 * balance) / target);
+    let percentage = Math.floor((100 * balance) / target);
+    
+    if (percentage > 100) {
+      return 100;
+    } else {
+      return percentage;
+    }
   }
 }
