@@ -31,14 +31,14 @@ export class MainAccountsComponent implements OnInit{
   ngOnInit(): void {
     this.subscription = this.demoService.demo$.pipe(
       map(v => v.accounts.main)
-    ).subscribe(
-      data => this.accounts = data
-    );
+    ).subscribe(data => {
+      this.accounts = data;
 
-    this.savings = this.accounts.savings.balance;
-    this.budget = this.accounts.budget.balance;
-    this.goal = this.accounts.goal.balance;
-    this.goalTarget = this.accounts.goal.target;
+      this.savings = this.accounts.savings.balance;
+      this.budget = this.accounts.budget.balance;
+      this.goal = this.accounts.goal.balance;
+      this.goalTarget = this.accounts.goal.target;
+    });
 
     this.destroyRef.onDestroy(() => this.subscription.unsubscribe());
   }
@@ -91,13 +91,7 @@ export class MainAccountsComponent implements OnInit{
     let targetBalance = form.value.targetBalance;
     let newData: { balance: number, target?: number} = { balance };
 
-    if (this.formType === 'savings') {
-      this.savings = balance;
-    } else if (this.formType === 'budget') {
-      this.budget = balance;
-    } else {
-      this.goal = balance;
-      this.goalTarget = targetBalance;
+    if (this.formType === 'goal') {
       newData.target = targetBalance;
     }
 
