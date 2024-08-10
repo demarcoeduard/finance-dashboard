@@ -16,7 +16,7 @@ export class DemoService {
           balance: 1500
         },
         goal: {
-          balance: 2000,
+          balance: 3000,
           target: 5000
         }
       },
@@ -177,4 +177,19 @@ export class DemoService {
 
   constructor() { }
 
+  onChangeMainAccounts(path: string, data: any) {
+    let newData = this.demoSubject.value;
+    let newMainData = newData.accounts.main;
+
+    if (path === 'savings') {
+      newMainData.savings = data;
+    } else if (path === 'budget') {
+      newMainData.budget = data;
+    } else {
+      newMainData.goal = data;
+    }
+
+    newData.accounts.main = newMainData;
+    this.demoSubject.next(newData);
+  }
 }
