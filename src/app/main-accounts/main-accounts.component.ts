@@ -95,7 +95,7 @@ export class MainAccountsComponent implements OnInit{
       newData.target = targetBalance;
     }
 
-    this.demoService.onChangeMainAccounts(this.formType, newData);
+    this.demoService.onEditMainAccounts(this.formType, newData);
 
     this.onCloseForm();
   }

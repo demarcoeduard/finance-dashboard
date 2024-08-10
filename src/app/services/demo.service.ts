@@ -177,7 +177,7 @@ export class DemoService {
 
   constructor() { }
 
-  onChangeMainAccounts(path: string, data: any) {
+  onEditMainAccounts(path: string, data: any) {
     let newData = this.demoSubject.value;
     let newMainData = newData.accounts.main;
 
@@ -192,4 +192,5 @@ export class DemoService {
     newData.accounts.main = newMainData;
     this.demoSubject.next(newData);
   }
+
 }
