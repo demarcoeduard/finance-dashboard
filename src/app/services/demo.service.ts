@@ -193,4 +193,61 @@ export class DemoService {
     this.demoSubject.next(newData);
   }
 
+  onCreateAccount(type: string, data: any) {
+    let newData = this.demoSubject.value;
+
+    if (type === 'income') {
+      newData.accounts.income.push(data);
+    } else {
+      newData.accounts.expense.push(data);
+    }
+
+    this.demoSubject.next(newData);
+  }
+
+  onEditAccount(type: string, idx: number, data: any) {
+    let newData = this.demoSubject.value;
+    let oldName = '';
+
+    if (type === 'income') {
+      oldName = newData.accounts.income[idx].name;
+
+      newData.accounts.income[idx] = data;
+
+      newData.transactions.income.map(v => {
+        if (v.source === oldName) v.source = data.name;
+      });
+    } else {
+      oldName = newData.accounts.expense[idx].name;
+
+      newData.accounts.expense[idx] = data;
+
+      newData.transactions.expense.map(v => {
+        if (v.receiver === oldName) v.receiver = data.name;
+      });
+    }
+
+    this.demoSubject.next(newData);
+  }
+
+  onDeleteAccount(type: string, idx: number) {
+    let newData = this.demoSubject.value;
+    let oldAccount = '';
+
+    if (type === 'income') {
+      oldAccount = newData.accounts.income[idx].name;
+
+      newData.accounts.income.splice(idx, 1);
+
+      newData.transactions.income = newData.transactions.income.filter(v => v.source != oldAccount);
+    } else {
+      oldAccount = newData.accounts.income[idx].name;
+
+      newData.accounts.income.splice(idx, 1);
+
+      newData.transactions.expense = newData.transactions.expense.filter(v => v.receiver != oldAccount);
+    }
+
+    this.demoSubject.next(newData);
+  }
 }
