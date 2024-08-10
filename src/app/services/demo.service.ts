@@ -241,9 +241,9 @@ export class DemoService {
 
       newData.transactions.income = newData.transactions.income.filter(v => v.source != oldAccount);
     } else {
-      oldAccount = newData.accounts.income[idx].name;
+      oldAccount = newData.accounts.expense[idx].name;
 
-      newData.accounts.income.splice(idx, 1);
+      newData.accounts.expense.splice(idx, 1);
 
       newData.transactions.expense = newData.transactions.expense.filter(v => v.receiver != oldAccount);
     }
