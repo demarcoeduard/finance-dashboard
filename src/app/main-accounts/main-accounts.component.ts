@@ -1,8 +1,10 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { DemoService } from '../services/demo.service';
+import { map, Subscription } from 'rxjs';
+import { Data } from '../services/data.model';
 
 @Component({
   selector: 'app-main-accounts',
@@ -11,17 +13,35 @@ import { DemoService } from '../services/demo.service';
   templateUrl: './main-accounts.component.html',
   styleUrl: './main-accounts.component.css'
 })
-export class MainAccountsComponent {
+export class MainAccountsComponent implements OnInit{
   popup = 0;
   formType = '';
-  savings = 100000000;
-  budget = 200000000;
-  goal = 300000000;
-  goalTarget = 100000000;
-  balance = 0;
-  targetBalance = 0;
+  savings = NaN;
+  budget = NaN;
+  goal = NaN;
+  goalTarget = NaN;
+  balance = NaN;
+  targetBalance = NaN;
   router = inject(Router);
   demoService = inject(DemoService);
+  accounts!:Data['accounts']['main'];
+  subscription!: Subscription;
+  destroyRef = inject(DestroyRef);
+
+  ngOnInit(): void {
+    this.subscription = this.demoService.demo$.pipe(
+      map(v => v.accounts.main)
+    ).subscribe(
+      data => this.accounts = data
+    );
+
+    this.savings = this.accounts.savings.balance;
+    this.budget = this.accounts.budget.balance;
+    this.goal = this.accounts.goal.balance;
+    this.goalTarget = this.accounts.goal.target;
+
+    this.destroyRef.onDestroy(() => this.subscription.unsubscribe());
+  }
 
   onShowPopup(id: number) {
     if (this.popup === id) {
@@ -67,14 +87,21 @@ export class MainAccountsComponent {
   }
 
   onSubmit(form: NgForm) {
+    let balance = form.value.balance;
+    let targetBalance = form.value.targetBalance;
+    let newData: { balance: number, target?: number} = { balance };
+
     if (this.formType === 'savings') {
-      this.savings = form.value.balance;
+      this.savings = balance;
     } else if (this.formType === 'budget') {
-      this.budget = form.value.balance;
+      this.budget = balance;
     } else {
-      this.goal = form.value.balance;
-      this.goalTarget = form.value.targetBalance;
+      this.goal = balance;
+      this.goalTarget = targetBalance;
+      newData.target = targetBalance;
     }
+
+    this.demoService.onChangeMainAccounts(this.formType, newData);
 
     this.onCloseForm();
   }
