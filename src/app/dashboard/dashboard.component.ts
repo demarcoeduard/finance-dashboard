@@ -4,12 +4,13 @@ import { BaseChartDirective } from 'ng2-charts'
 import { DemoService } from '../services/demo.service';
 import { Data } from '../services/data.model';
 import { Subscription } from 'rxjs';
+import { DecimalPipe } from '@angular/common';
 Chart.register(PieController, Legend, Colors, ArcElement, Tooltip);
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [BaseChartDirective],
+  imports: [BaseChartDirective, DecimalPipe],
   providers: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
