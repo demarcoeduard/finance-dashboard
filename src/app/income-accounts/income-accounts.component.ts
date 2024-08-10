@@ -1,7 +1,10 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
+import { Data } from '../services/data.model';
+import { DemoService } from '../services/demo.service';
+import { map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-income-accounts',
@@ -10,43 +13,37 @@ import { NavigationExtras, Router } from '@angular/router';
   templateUrl: './income-accounts.component.html',
   styleUrl: './income-accounts.component.css'
 })
-export class IncomeAccountsComponent {
+export class IncomeAccountsComponent implements OnInit {
   formType = '';
   alertType = '';
   accountName = '';
   accountBalance!:number;
-  accountIdx: null|number = null;
+  accountIdx = NaN;
   router = inject(Router);
-  accounts = [
-    {
-      name: 'account-name1',
-      balance: 100000000
-    },
-    {
-      name: 'account-name2',
-      balance: 100000000
-    },
-    {
-      name: 'account-name3',
-      balance: 100000000
-    },
-    {
-      name: 'account-name4',
-      balance: 100000000
-    },
-    {
-      name: 'account-name5',
-      balance: 100000000
-    },
-    {
-      name: 'account-name6',
-      balance: 100000000
-    },
-  ]
+  accounts:Data['accounts']['income'] = [];
+  data:Data['accounts']['income'] = [];
+  demoService = inject(DemoService);
+  subscription!:Subscription;
+  destroyRef = inject(DestroyRef);
 
-  onShowActions(idx: number|null) {
+  ngOnInit(): void {
+    this.subscription = this.demoService.demo$.pipe(
+      map(v => v.accounts.income)
+    ).subscribe(response => {
+      this.data = response;
+
+      this.accounts = this.data.map(account => ({
+        name: account.name,
+        balance: account.balance
+      }));
+    });
+
+    this.destroyRef.onDestroy(() => this.subscription.unsubscribe());
+  }
+
+  onShowActions(idx: number) {
     if (this.accountIdx === idx) {
-      this.accountIdx = null;
+      this.accountIdx = NaN;
     } else {
       this.accountIdx = idx;
     }
@@ -54,7 +51,7 @@ export class IncomeAccountsComponent {
 
   onCloseAlert() {
     this.alertType = '';
-    this.onShowActions(null);
+    this.onShowActions(NaN);
   }
 
   onOpenAlert() {
@@ -62,9 +59,9 @@ export class IncomeAccountsComponent {
   }
 
   onDeleteAccount() {
-    this.accounts.splice(this.accountIdx!, 1);
+    this.demoService.onDeleteAccount('income', this.accountIdx);
     this.onCloseAlert();
-    this.onShowActions(null);
+    this.onShowActions(NaN);
   }
 
   onShowTransactions() {
@@ -77,7 +74,7 @@ export class IncomeAccountsComponent {
 
   onOpenForm(type: string) {
     if (type === 'create') {
-      this.onShowActions(null);
+      this.onShowActions(NaN);
       this.accountName = '';
       this.accountBalance = NaN; 
     }
@@ -91,20 +88,15 @@ export class IncomeAccountsComponent {
   onSubmit(form: NgForm) {
     let name:string = form.value.name;
     let balance:number = form.value.balance;
+    let data = { name: name, balance: balance };
 
     if(this.formType === 'create') {
-      this.accounts.push(
-        {
-          name: name,
-          balance: balance
-        }
-      )
+      this.demoService.onCreateAccount('income', data);
     } else {
-      this.accounts[this.accountIdx!].name = name;
-      this.accounts[this.accountIdx!].balance = balance;
+      this.demoService.onEditAccount('income', this.accountIdx, data);
     }
 
+    this.onShowActions(NaN);
     this.onOpenForm('');
-    this.onShowActions(null);
   }
 }
