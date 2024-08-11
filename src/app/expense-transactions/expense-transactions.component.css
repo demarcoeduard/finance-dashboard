@@ -92,6 +92,10 @@ th, td {
   z-index: 10;
 }
 
+.index {
+  z-index: 100 !important;
+}
+
 form {
   width: 700px;
   padding: 60px;

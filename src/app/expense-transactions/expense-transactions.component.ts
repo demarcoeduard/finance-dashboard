@@ -46,7 +46,7 @@ export class ExpenseTransactionsComponent {
   ];
   search = '';
   router = inject(Router);
-  alertType = '';
+  alertType = false;
   deleteAlert = false;
   transactionIdx:number|null = NaN;
   isOpen = false;
@@ -66,7 +66,7 @@ export class ExpenseTransactionsComponent {
   }
 
   onCloseAlert() {
-    this.alertType = '';
+    this.alertType = false;
   }
 
   onOpenForm() {
