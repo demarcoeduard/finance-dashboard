@@ -248,7 +248,7 @@ export class DemoService {
     } else if (type === 'income') {
       newData.accounts.income[idx].balance = amount;
     } else {
-      newData.accounts.income[idx].balance = amount;
+      newData.accounts.expense[idx].balance = amount;
     }
 
     this.demoSubject.next(newData);
