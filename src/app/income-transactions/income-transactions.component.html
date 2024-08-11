@@ -58,18 +58,15 @@
     </form>
   </div>
 }
-@if(alertType === 'funds' || alertType === 'account') {
-  <div class="alert-container">
+@if(alertType === true) {
+  <div class="alert-container index">
     <div class="alert">
       <i class="fa-solid fa-xmark" (click)="onCloseAlert()"></i>
       <p class="nunito-sans-bold alert-name">
-        {{ alertType === 'funds' ? 'Insufficient funds' : 'Receiver account' }}
+        Insufficient funds
       </p>
       <p class="nunito-sans-regular alert-msg">
-        {{ alertType === 'funds' 
-        ? 'The amount you want to transfer exceeds your current balance. Please enter a lower amount to proceed.' 
-        : 'The source and receiver accounts are the same. Please choose a different receiver account to proceed.' 
-      }}
+        The amount you want to transfer exceeds your current balance. Please enter a lower amount to proceed.
       </p>
     </div>
   </div>

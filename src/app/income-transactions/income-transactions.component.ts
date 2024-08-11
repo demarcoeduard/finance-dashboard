@@ -46,7 +46,7 @@ export class IncomeTransactionsComponent {
   ];
   search = '';
   router = inject(Router);
-  alertType = '';
+  alertType = false;
   deleteAlert = false;
   transactionIdx:number|null = NaN;
   isOpen = false;
@@ -66,7 +66,7 @@ export class IncomeTransactionsComponent {
   }
 
   onCloseAlert() {
-    this.alertType = '';
+    this.alertType = false;
   }
 
   onOpenForm() {
