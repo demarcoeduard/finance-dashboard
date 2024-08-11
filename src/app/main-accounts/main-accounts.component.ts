@@ -34,10 +34,10 @@ export class MainAccountsComponent implements OnInit{
     ).subscribe(data => {
       this.accounts = data;
 
-      this.savings = this.accounts.savings.balance;
-      this.budget = this.accounts.budget.balance;
-      this.goal = this.accounts.goal.balance;
-      this.goalTarget = this.accounts.goal.target;
+      this.savings = this.accounts[0].balance;
+      this.budget = this.accounts[1].balance;
+      this.goal = this.accounts[2].balance;
+      this.goalTarget = this.accounts[2].target;
     });
 
     this.destroyRef.onDestroy(() => this.subscription.unsubscribe());
@@ -89,13 +89,15 @@ export class MainAccountsComponent implements OnInit{
   onSubmit(form: NgForm) {
     let balance = form.value.balance;
     let targetBalance = form.value.targetBalance;
-    let newData: { balance: number, target?: number} = { balance };
+    let name = this.formType[0].toUpperCase() + this.formType.slice(1);
+    let idx = this.accounts.findIndex(v => v.name === name);
+    let newData: {name: string, balance: number, target?: number} = { name, balance };
 
     if (this.formType === 'goal') {
       newData.target = targetBalance;
     }
 
-    this.demoService.onEditMainAccounts(this.formType, newData);
+    this.demoService.onEditAccount('main', idx, newData);
 
     this.onCloseForm();
   }

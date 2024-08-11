@@ -38,9 +38,9 @@ export class DashboardComponent implements OnInit {
       let income = this.data.accounts.income;
       let expense = this.data.accounts.expense;
   
-      this.savings = main.savings.balance;
-      this.budget = main.budget.balance;
-      this.percentage = this.calcPercentage(main.goal.balance, main.goal.target);
+      this.savings = main[0].balance;
+      this.budget = main[1].balance;
+      this.percentage = this.calcPercentage(main[2].balance, main[2].target);
   
       this.incomeLabels = income.map(v => v.name);
       this.incomeData = income.map(v => v.balance);
