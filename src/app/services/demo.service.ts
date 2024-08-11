@@ -240,4 +240,45 @@ export class DemoService {
     this.demoSubject.next(newData);
   }
 
+  onEditBalance(type: string, idx: number, amount: number) {
+    let newData = this.demoSubject.value;
+
+    if (type === 'main') {
+      newData.accounts.main[idx].balance = amount;
+    } else if (type === 'income') {
+      newData.accounts.income[idx].balance = amount;
+    } else {
+      newData.accounts.income[idx].balance = amount;
+    }
+
+    this.demoSubject.next(newData);
+  }
+
+  onCreateTransaction(type: string, data: any) {
+    let newData = this.demoSubject.value;
+
+    if (type === 'transfer') {
+      newData.transactions.transfer.push(data);
+    } else if (type === 'income') {
+      newData.transactions.income.push(data);
+    } else {
+      newData.transactions.expense.push(data);
+    }
+
+    this.demoSubject.next(newData);
+  }
+
+  onDeleteTransaction(type: string, idx: number) {
+    let newData = this.demoSubject.value;
+
+    if (type === 'transfer') {
+      newData.transactions.transfer.splice(idx, 1)
+    } else if (type === 'income') {
+      newData.transactions.income.splice(idx, 1);
+    } else {
+      newData.transactions.expense.splice(idx, 1);
+    }
+
+    this.demoSubject.next(newData);
+  }
 }
