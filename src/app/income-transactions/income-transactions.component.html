@@ -28,9 +28,15 @@
           class="nunito-sans-regular form-input" 
           type="text" 
           id="source"
+          list="incomes"
           ngModel
           name="source"
           required>
+        <datalist id="incomes">
+          @for(account of incomeAccounts; track account.name) {
+            <option value="{{ account.name }}"></option>
+          }
+        </datalist>
         <label class="nunito-sans-semibold" for="amount">Amount</label>
         <input 
           class="nunito-sans-regular form-input" 
@@ -46,9 +52,15 @@
           class="nunito-sans-regular form-input" 
           type="text" 
           id="receiver"
+          list="mains"
           ngModel
           name="receiver"
           required>
+        <datalist id="mains">
+          @for(account of mainAccounts; track account.name) {
+            <option value="{{ account.name }}"></option>
+          }
+        </datalist>
       </div>
       <button 
         class="nunito-sans-bold normal-btn form-btn"
@@ -79,7 +91,7 @@
         Deleting this transaction will reverse it. The amount will be returned to the original account.
       </p>
       <div class="btns-container">
-        <button class="nunito-sans-bold normal-btn" (click)="onOpenAlert(null)">Close</button>
+        <button class="nunito-sans-bold normal-btn" (click)="onOpenAlert(NaN)">Close</button>
         <button class="nunito-sans-bold normal-btn" (click)="onDelete()">Delete</button>
       </div>
     </div>
