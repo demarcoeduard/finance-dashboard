@@ -1,17 +1,20 @@
 export type Data = {
   accounts: {
-    main: {
-      savings: {
+    main: [
+      {
+        name: string;
         balance: number;
-      };
-      budget: {
+      },
+      {
+        name: string;
         balance: number;
-      };
-      goal: {
+      },
+      {
+        name: string;
         balance: number;
         target: number;
-      };
-    };
+      }
+    ];
     income: {
       name: string;
       balance: number;

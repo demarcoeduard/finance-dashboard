@@ -8,18 +8,6 @@ import { Data } from './data.model';
 export class DemoService {
   private demo:Data = {
     accounts: {
-      // main: {
-      //   savings: {
-      //     balance: 5000
-      //   },
-      //   budget: {
-      //     balance: 1500
-      //   },
-      //   goal: {
-      //     balance: 3000,
-      //     target: 5000
-      //   }
-      // },
       main: [
         {
           name: 'Savings',
