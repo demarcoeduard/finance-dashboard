@@ -9,7 +9,7 @@
       <th>Amount</th>
       <th>Receiver</th>
     </tr>
-    @for(transaction of transactions | filter:search ; track transaction.source; let idx = $index) {
+    @for(transaction of transactions | filter:search ; track transaction; let idx = $index) {
       <tr class="nunito-sans-semibold row" title="Click to delete transaction" (click)="onOpenAlert(idx)">
         <td>{{ transaction.source }}</td>
         <td>{{ transaction.amount | number }}</td>
@@ -28,9 +28,15 @@
           class="nunito-sans-regular form-input" 
           type="text" 
           id="source"
+          list="accounts"
           ngModel
           name="source"
           required>
+        <datalist id="accounts">
+          @for(account of accounts; track account.name) {
+            <option value="{{ account.name }}"></option>
+          }
+        </datalist>
         <label class="nunito-sans-semibold" for="amount">Amount</label>
         <input 
           class="nunito-sans-regular form-input" 
@@ -46,6 +52,7 @@
           class="nunito-sans-regular form-input" 
           type="text" 
           id="receiver"
+          list="accounts"
           ngModel
           name="receiver"
           required>
@@ -59,7 +66,7 @@
   </div>
 }
 @if(alertType === 'funds' || alertType === 'account') {
-  <div class="alert-container">
+  <div class="alert-container index">
     <div class="alert">
       <i class="fa-solid fa-xmark" (click)="onCloseAlert()"></i>
       <p class="nunito-sans-bold alert-name">
@@ -67,7 +74,7 @@
       </p>
       <p class="nunito-sans-regular alert-msg">
         {{ alertType === 'funds' 
-        ? 'The amount you want to transfer exceeds your current balance. Please enter a lower amount to proceed.' 
+        ? 'The amount exceeds the available balance. Please enter a lower amount or check the account balance to proceed.' 
         : 'The source and receiver accounts are the same. Please choose a different receiver account to proceed.' 
       }}
       </p>
@@ -82,7 +89,7 @@
         Deleting this transaction will reverse it. The amount will be returned to the original account.
       </p>
       <div class="btns-container">
-        <button class="nunito-sans-bold normal-btn" (click)="onOpenAlert(null)">Close</button>
+        <button class="nunito-sans-bold normal-btn" (click)="onOpenAlert(NaN)">Close</button>
         <button class="nunito-sans-bold normal-btn" (click)="onDelete()">Delete</button>
       </div>
     </div>
