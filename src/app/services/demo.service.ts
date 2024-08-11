@@ -8,18 +8,33 @@ import { Data } from './data.model';
 export class DemoService {
   private demo:Data = {
     accounts: {
-      main: {
-        savings: {
+      // main: {
+      //   savings: {
+      //     balance: 5000
+      //   },
+      //   budget: {
+      //     balance: 1500
+      //   },
+      //   goal: {
+      //     balance: 3000,
+      //     target: 5000
+      //   }
+      // },
+      main: [
+        {
+          name: 'Savings',
           balance: 5000
         },
-        budget: {
+        {
+          name: 'Budget',
           balance: 1500
         },
-        goal: {
+        {
+          name: 'Goal',
           balance: 3000,
           target: 5000
         }
-      },
+      ],
       income: [
         {
           name: 'Salary',
@@ -177,22 +192,6 @@ export class DemoService {
 
   constructor() { }
 
-  onEditMainAccounts(path: string, data: any) {
-    let newData = this.demoSubject.value;
-    let newMainData = newData.accounts.main;
-
-    if (path === 'savings') {
-      newMainData.savings = data;
-    } else if (path === 'budget') {
-      newMainData.budget = data;
-    } else {
-      newMainData.goal = data;
-    }
-
-    newData.accounts.main = newMainData;
-    this.demoSubject.next(newData);
-  }
-
   onCreateAccount(type: string, data: any) {
     let newData = this.demoSubject.value;
 
@@ -209,7 +208,9 @@ export class DemoService {
     let newData = this.demoSubject.value;
     let oldName = '';
 
-    if (type === 'income') {
+    if (type === 'main') {
+      newData.accounts.main[idx] = data;
+    } else if (type === 'income') {
       oldName = newData.accounts.income[idx].name;
 
       newData.accounts.income[idx] = data;
@@ -250,4 +251,5 @@ export class DemoService {
 
     this.demoSubject.next(newData);
   }
+
 }
