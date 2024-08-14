@@ -41,8 +41,10 @@
   <div class="alert-container">
     <div class="alert">
       <i class="fa-solid fa-xmark" tabindex="1" (click)="onAlert()" (keydown)="handleAlert($event)"></i>
-      <p class="nunito-sans-bold alert-name">{{ alertName }}</p>
-      <p class="nunito-sans-regular alert-msg">{{ alertMessage }}</p>
+      <p class="nunito-sans-bold alert-name">Existing account</p>
+      <p class="nunito-sans-regular alert-msg">
+        An account with this email already exists. Please choose a different email or log in with the existing account.
+      </p>
     </div>
   </div>
 }
