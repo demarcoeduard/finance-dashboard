@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-auth-form',
@@ -11,8 +13,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class AuthFormComponent {
   isSignUp = true;
   isAlert = false;
-  alertName = 'Existing account';
-  alertMessage = 'An account with this email already exists. Please choose a different email or log in with the existing account.'
+  authService = inject(AuthService);
+  dbService = inject(DatabaseService);
 
   onChangeForm() {
     this.isSignUp = !this.isSignUp;       
@@ -35,6 +37,14 @@ export class AuthFormComponent {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form)
+    this.authService.signUp(form.value.email, form.value.password).subscribe((response) => {
+      const uid = response.user.uid;
+
+      this.dbService.createUserData(uid).then(() => {
+        this.dbService.getUserData(uid);
+      });
+      
+      localStorage.setItem('uid', uid);
+    })
   }
 }

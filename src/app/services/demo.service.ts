@@ -175,6 +175,8 @@ export class DemoService {
       ]
     }
   };
+      newData.accounts.expense.push(data);
+    }
   private demoSubject = new BehaviorSubject(this.demo);
   public demo$ = this.demoSubject.asObservable();  
 
@@ -186,8 +188,6 @@ export class DemoService {
     if (type === 'income') {
       newData.accounts.income.push(data);
     } else {
-      newData.accounts.expense.push(data);
-    }
 
     this.demoSubject.next(newData);
   }
@@ -281,4 +281,21 @@ export class DemoService {
 
     this.demoSubject.next(newData);
   }
+
+  onDisplayUserData(data: any) {
+      const newData: Data = {
+        accounts: {
+          main: data,
+          income: [],
+          expense: []
+        },
+        transactions: {
+          transfer: [],
+          income: [],
+          expense: []
+        }
+      };
+      this.demoSubject.next(newData);
+    };
+
 }
