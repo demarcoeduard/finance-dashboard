@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Data } from './data.model';
 
 @Injectable({
@@ -175,12 +175,11 @@ export class DemoService {
       ]
     }
   };
-      newData.accounts.expense.push(data);
-    }
   private demoSubject = new BehaviorSubject(this.demo);
-  public demo$ = this.demoSubject.asObservable();  
 
-  constructor() { }
+  getData(): Observable<any> {
+    return this.demoSubject.asObservable();
+  }
 
   onCreateAccount(type: string, data: any) {
     let newData = this.demoSubject.value;
@@ -188,6 +187,8 @@ export class DemoService {
     if (type === 'income') {
       newData.accounts.income.push(data);
     } else {
+      newData.accounts.expense.push(data);
+    }
 
     this.demoSubject.next(newData);
   }
@@ -281,21 +282,4 @@ export class DemoService {
 
     this.demoSubject.next(newData);
   }
-
-  onDisplayUserData(data: any) {
-      const newData: Data = {
-        accounts: {
-          main: data,
-          income: [],
-          expense: []
-        },
-        transactions: {
-          transfer: [],
-          income: [],
-          expense: []
-        }
-      };
-      this.demoSubject.next(newData);
-    };
-
 }
