@@ -18,10 +18,12 @@ export type Data = {
     income: {
       name: string;
       balance: number;
+      key?: string;
     }[];
     expense: {
       name: string;
       balance: number;
+      key?: string;
     }[];
   };
   transactions: {
@@ -29,16 +31,19 @@ export type Data = {
       source: 'Savings' | 'Budget' | 'Goal';
       amount: number;
       receiver: 'Savings' | 'Budget' | 'Goal';
+      key?: string;
     }[];
     income: {
       source: string;
       amount: number;
       receiver: 'Savings' | 'Budget' | 'Goal';
+      key?: string;
     }[];
     expense: {
       source: 'Savings' | 'Budget' | 'Goal';
       amount: number;
       receiver: string;
+      key?: string;
     }[];
   };
 }
