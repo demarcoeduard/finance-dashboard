@@ -4,7 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { Data } from '../services/data.model';
 import { map, Subscription } from 'rxjs';
-import { DemoService } from '../services/demo.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-expense-accounts',
@@ -20,14 +20,14 @@ export class ExpenseAccountsComponent implements OnInit {
   accountBalance!:number;
   accountIdx = NaN;
   router = inject(Router);
-  demoService = inject(DemoService);
+  dataService = inject(DataService);
   accounts:Data['accounts']['expense'] = [];
   data:Data['accounts']['expense'] = [];
   subscription!:Subscription;
   destroyRef = inject(DestroyRef);
   
   ngOnInit(): void {
-    this.subscription = this.demoService.demo$.pipe(
+    this.subscription = this.dataService.getData().pipe(
       map(v => v.accounts.expense)
     ).subscribe(response => {
       this.data = response;
@@ -59,7 +59,7 @@ export class ExpenseAccountsComponent implements OnInit {
   }
 
   onDeleteAccount() {
-    this.demoService.onDeleteAccount('expense', this.accountIdx);
+    this.dataService.onDeleteAccount('expense', this.accountIdx);
     this.onCloseAlert();
     this.onShowActions(NaN);
   }
@@ -91,9 +91,9 @@ export class ExpenseAccountsComponent implements OnInit {
     let data = { name: name, balance: balance };
 
     if(this.formType === 'create') {
-      this.demoService.onCreateAccount('expense', data);
+      this.dataService.onCreateAccount('expense', data);
     } else {
-      this.demoService.onEditAccount('expense', this.accountIdx, data);
+      this.dataService.onEditAccount('expense', this.accountIdx, data);
     }
 
     this.onShowActions(NaN);

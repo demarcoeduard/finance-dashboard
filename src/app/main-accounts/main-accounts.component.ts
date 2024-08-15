@@ -2,9 +2,9 @@ import { DecimalPipe } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
-import { DemoService } from '../services/demo.service';
 import { map, Subscription } from 'rxjs';
 import { Data } from '../services/data.model';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-main-accounts',
@@ -23,13 +23,13 @@ export class MainAccountsComponent implements OnInit{
   balance = NaN;
   targetBalance = NaN;
   router = inject(Router);
-  demoService = inject(DemoService);
+  dataService = inject(DataService);
   accounts!:Data['accounts']['main'];
   subscription!: Subscription;
   destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.subscription = this.demoService.demo$.pipe(
+    this.subscription = this.dataService.getData().pipe(
       map(v => v.accounts.main)
     ).subscribe(data => {
       this.accounts = data;
@@ -97,7 +97,7 @@ export class MainAccountsComponent implements OnInit{
       newData.target = targetBalance;
     }
 
-    this.demoService.onEditAccount('main', idx, newData);
+    this.dataService.onEditAccount('main', idx, newData);
 
     this.onCloseForm();
   }

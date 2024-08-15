@@ -3,9 +3,9 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FilterPipe } from '../filter.pipe';
-import { DemoService } from '../services/demo.service';
 import { Data } from '../services/data.model';
 import { map, Subscription, tap } from 'rxjs';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-expense-transactions',
@@ -22,7 +22,7 @@ export class ExpenseTransactionsComponent implements OnInit {
   transactionIdx = NaN;
   NaN = NaN;
   isOpen = false;
-  demoService = inject(DemoService);
+  dataService = inject(DataService);
   expense!:Data['transactions']['expense'];
   transactions!:Data['transactions']['expense'];
   mainAccounts!:Data['accounts']['main'];
@@ -35,7 +35,7 @@ export class ExpenseTransactionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.demoService.demo$.pipe(
+    this.subscription = this.dataService.getData().pipe(
       tap(v => {
         this.mainAccounts = JSON.parse(JSON.stringify(v.accounts.main));
         this.expenseAccounts = JSON.parse(JSON.stringify(v.accounts.expense));
@@ -75,9 +75,9 @@ export class ExpenseTransactionsComponent implements OnInit {
       return;
     }
 
-    this.demoService.onEditBalance('main', sourceIdx, sourceAmount);
-    this.demoService.onEditBalance('expense', receiverIdx, receiverAmount);
-    this.demoService.onDeleteTransaction('expense', this.transactionIdx);
+    this.dataService.onEditBalance('main', sourceIdx, sourceAmount);
+    this.dataService.onEditBalance('expense', receiverIdx, receiverAmount);
+    this.dataService.onDeleteTransaction('expense', this.transactionIdx);
 
     this.onOpenAlert(NaN);
   }
@@ -111,9 +111,9 @@ export class ExpenseTransactionsComponent implements OnInit {
       receiver: receiver
     }
  
-    this.demoService.onEditBalance('main', sourceIdx, sourceAmount);
-    this.demoService.onEditBalance('expense', receiverIdx, receiverAmount);
-    this.demoService.onCreateTransaction('expense', data);
+    this.dataService.onEditBalance('main', sourceIdx, sourceAmount);
+    this.dataService.onEditBalance('expense', receiverIdx, receiverAmount);
+    this.dataService.onCreateTransaction('expense', data);
 
     this.onOpenForm();
   }

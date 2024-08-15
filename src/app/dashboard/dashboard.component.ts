@@ -1,10 +1,10 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core'
 import { Colors, Legend, PieController, Chart, ArcElement, Tooltip, ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts'
-import { DemoService } from '../services/demo.service';
 import { Data } from '../services/data.model';
 import { Subscription } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
+import { DataService } from '../services/data.service';
 Chart.register(PieController, Legend, Colors, ArcElement, Tooltip);
 
 @Component({
@@ -26,13 +26,13 @@ export class DashboardComponent implements OnInit {
   expenseData: number[] = [];
   income!:ChartData;
   expense!:ChartData;
-  demoService = inject(DemoService);
+  dataService = inject(DataService);
   subscription!: Subscription;
   destroyRef = inject(DestroyRef);
   
   ngOnInit(): void {
-    this.subscription = this.demoService.demo$.subscribe(demoData => {
-      this.data = demoData;
+    this.subscription = this.dataService.getData().subscribe(data => {
+      this.data = data;
 
       let main = this.data.accounts.main;
       let income = this.data.accounts.income;
