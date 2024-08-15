@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { DatabaseService } from '../services/database.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-auth-form',
@@ -14,7 +14,7 @@ export class AuthFormComponent {
   isSignUp = true;
   isAlert = false;
   authService = inject(AuthService);
-  dbService = inject(DatabaseService);
+  dataService = inject(DataService);
 
   onChangeForm() {
     this.isSignUp = !this.isSignUp;       
@@ -40,8 +40,9 @@ export class AuthFormComponent {
     this.authService.signUp(form.value.email, form.value.password).subscribe((response) => {
       const uid = response.user.uid;
 
-      this.dbService.createUserData(uid).then(() => {
-        this.dbService.getUserData(uid);
+      this.dataService.createUserData(uid).then(() => {
+        this.dataService.fetchData(uid);
+        this.dataService.onSetMode();
       });
       
       localStorage.setItem('uid', uid);
