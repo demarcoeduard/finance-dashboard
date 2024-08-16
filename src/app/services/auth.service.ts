@@ -12,7 +12,7 @@ export class AuthService {
     return from(createUserWithEmailAndPassword(this.auth, email, password));
   }
 
-  singIn(email: string, password: string): Observable<any> {
+  signIn(email: string, password: string): Observable<any> {
     return from(signInWithEmailAndPassword(this.auth, email, password));
   }
 
