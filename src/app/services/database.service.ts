@@ -92,20 +92,14 @@ export class DatabaseService {
     this.fetchData(uid!);
   }
 
-  private checkTransactions(type: string, arr1: any[], arr2: any[]) {
-    if (arr1.length !== arr2.length) return true;
+  private convertToFireData(array: any[]) {
+    let data: any[] = [];
 
-    if (type === 'income') {
-      for (let i = 0; i < arr1.length; i++) {
-        if (arr1[i].source !== arr2[i].source) return true;
-      };
-    } else {
-      for (let i = 0; i < arr1.length; i++) {
-        if (arr1[i].receiver !== arr2[i].receiver) return true;
-      };
-    };
+    array.forEach(item => {
+      data[item.key] = item;
+    });
 
-    return false;
+    return data;
   }
 
   onEditAccount(type: string, idx: number, data: any) {
@@ -124,29 +118,32 @@ export class DatabaseService {
       accounts = ref(this.db, `${uid}/accounts/income/${key}`);
       
       oldName = oldData.accounts.income[idx].name;
+      
+      if (oldName !== data.name) {
+        newData.transactions.income.map(v => {
+          if (v.source === oldName) v.source = data.name;
+        }); 
 
-      newData.transactions.income.map(v => {
-        if (v.source === oldName) v.source = data.name;
-      });
-
-      if (this.checkTransactions('income', oldData.transactions.income, newData.transactions.income)) {
         transactions = ref(this.db, `${uid}/transactions/income`);
-        set(transactions, newData.transactions.income);
-      };
+
+        set(transactions, this.convertToFireData(newData.transactions.income));
+      }
+      
     } else {
       key = oldData.accounts.expense[idx].key!;
       accounts = ref(this.db, `${uid}/accounts/expense/${key}`);
       
       oldName = oldData.accounts.expense[idx].name;
 
-      newData.transactions.expense.map(v => {
-        if (v.receiver === oldName) v.receiver = data.name;
-      });
+      if (oldName !== data.name) {
+        newData.transactions.expense.map(v => {
+          if (v.receiver === oldName) v.receiver = data.name;
+        });
 
-      if (this.checkTransactions('expense', oldData.transactions.expense, newData.transactions.expense)) {
         transactions = ref(this.db, `${uid}/transactions/expense`);
-        set(transactions, newData.transactions.expense);
-      };
+
+        set(transactions, this.convertToFireData(newData.transactions.expense));
+      }
     };
  
     set(accounts, data);
@@ -168,24 +165,26 @@ export class DatabaseService {
 
       oldName = oldData.accounts.income[idx].name;
 
-      newData.transactions.income = newData.transactions.income.filter(v => v.source !== oldName);
-
-      if (this.checkTransactions('income', oldData.transactions.income, newData.transactions.income)) {
+      if (newData.transactions.income.some(v => v.source === oldName)) {
+        newData.transactions.income = newData.transactions.income.filter(v => v.source !== oldName);
+        
         transactions = ref(this.db, `${uid}/transactions/income`);
-        set(transactions, newData.transactions.income);
-      };
+
+        set(transactions, this.convertToFireData(newData.transactions.income));
+      }
     } else {
       key = oldData.accounts.expense[idx].key!;
       account = ref(this.db, `${uid}/accounts/expense/${key}`);
 
       oldName = oldData.accounts.expense[idx].name;
 
-      newData.transactions.expense = newData.transactions.expense.filter(v => v.receiver !== oldName);
-
-      if (this.checkTransactions('expense', oldData.transactions.expense, newData.transactions.expense)) {
+      if (newData.transactions.expense.some(v => v.receiver === oldName)) {
+        newData.transactions.expense = newData.transactions.expense.filter(v => v.receiver !== oldName);
+        
         transactions = ref(this.db, `${uid}/transactions/expense`);
-        set(transactions, newData.transactions.expense);
-      };
+
+        set(transactions, this.convertToFireData(newData.transactions.expense));
+      }
     };
 
     remove(account);
