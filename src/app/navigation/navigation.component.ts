@@ -35,6 +35,7 @@ export class NavigationComponent implements OnInit{
   dataService = inject(DataService);
   auth = inject(AuthService);
   theme = '';
+  isUser = false;
 
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
@@ -48,6 +49,12 @@ export class NavigationComponent implements OnInit{
       this.theme = theme;
       document.documentElement.setAttribute('data-theme', this.theme);
       this.isDarkMode = this.theme === 'dark';
+      
+      if (theme) {
+        this.isUser = true;
+      } else {
+        this.isUser = false;
+      };
     });
 
     const theme = document.documentElement.getAttribute('data-theme');
@@ -66,7 +73,7 @@ export class NavigationComponent implements OnInit{
 
       if (event instanceof NavigationEnd) {
         this.location = event.url;
-      }
+      };
     });
     this.updateNav();
   }
@@ -121,6 +128,7 @@ export class NavigationComponent implements OnInit{
       this.dataService.onSetMode();
       document.documentElement.setAttribute('data-theme', 'light');
       this.isDarkMode = false;
+      this.isUser = false;
     })
   }
 }

@@ -6,7 +6,9 @@
   <header [@drawer]>
     <i class="fa-solid fa-xmark" tabindex="0" (keydown)="handleToggleNav($event)" (click)="onToggleNav()"></i>
     <nav>
-      <a routerLink="welcome" routerLinkActive="active" class="nunito-sans-bold link">Welcome</a>
+      @if(!isUser) {
+        <a routerLink="welcome" routerLinkActive="active" class="nunito-sans-bold link">Welcome</a>
+      }
       <a routerLink="dashboard" routerLinkActive="active" class="nunito-sans-bold link">Dashboard</a>
       <a 
         routerLink="main-accounts" 
@@ -60,7 +62,9 @@
           </div>
         </div>
       </div>
-      <button class="nunito-sans-bold log-out" (click)="onLogOut()">Log Out</button>
+      @if(isUser) {
+        <button class="nunito-sans-bold log-out" (click)="onLogOut()">Log Out</button>
+      }
     </div>
   </header>
 }
