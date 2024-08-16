@@ -2,9 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { map } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { Data } from '../services/data.model';
 
 @Component({
   selector: 'app-navigation',
