@@ -41,10 +41,15 @@
   <div class="alert-container">
     <div class="alert">
       <i class="fa-solid fa-xmark" tabindex="1" (click)="onAlert()" (keydown)="handleAlert($event)"></i>
-      <p class="nunito-sans-bold alert-name">Existing account</p>
-      <p class="nunito-sans-regular alert-msg">
-        An account with this email already exists. Please choose a different email or log in with the existing account.
+      <p class="nunito-sans-bold alert-name">
+        {{ alertType === 'exist' ? 'Existing account' : 'Incorrect credentials' }}
       </p>
+      <p class="nunito-sans-regular alert-msg">
+        {{ alertType === 'exist' 
+        ? 'An account with this email already exists. Please choose a different email or sign in with the existing account.' 
+        : 'The provided credentials are incorrect. Please enter the correct info to proceed to your account.' 
+        }}
+        </p>
     </div>
   </div>
 }
