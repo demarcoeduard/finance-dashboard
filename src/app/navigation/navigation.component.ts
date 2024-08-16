@@ -3,7 +3,7 @@ import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -41,21 +41,19 @@ export class NavigationComponent implements OnInit{
   private activatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    this.dataService.getData()
-    .pipe(
-      map(data => data.theme)
-    )
-    .subscribe(theme => {
-      this.theme = theme;
-      document.documentElement.setAttribute('data-theme', this.theme);
-      this.isDarkMode = this.theme === 'dark';
-      
-      if (theme) {
-        this.isUser = true;
-      } else {
-        this.isUser = false;
-      };
-    });
+    this.dataService.onGetTheme().then(() => {
+      this.dataService.getData()
+      .pipe(
+        filter(data => !!data && !!data.theme),
+        map(data => data.theme)
+      )
+      .subscribe(theme => {
+        this.theme = theme;
+        document.documentElement.setAttribute('data-theme', this.theme);
+        this.isDarkMode = this.theme === 'dark';
+        this.isUser = !!theme;
+      });
+    })
 
     const theme = document.documentElement.getAttribute('data-theme');
     if (theme === "dark") {
@@ -129,6 +127,7 @@ export class NavigationComponent implements OnInit{
       document.documentElement.setAttribute('data-theme', 'light');
       this.isDarkMode = false;
       this.isUser = false;
+      this.router.navigate(['/welcome']);
     })
   }
 }
