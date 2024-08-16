@@ -12,7 +12,8 @@ import { DataService } from '../services/data.service';
 })
 export class AuthFormComponent {
   isSignUp = true;
-  isAlert = false;
+  isAlert = false;;
+  alertType = ''
   authService = inject(AuthService);
   dataService = inject(DataService);
 
@@ -37,15 +38,39 @@ export class AuthFormComponent {
   }
 
   onSubmit(form: NgForm) {
-    this.authService.signUp(form.value.email, form.value.password).subscribe((response) => {
-      const uid = response.user.uid;
+    if (this.isSignUp) {
+      this.authService.signUp(form.value.email, form.value.password).subscribe({
+        next: response => {
+          const uid = response.user.uid;
+          
+          localStorage.setItem('uid', uid);
 
-      this.dataService.createUserData(uid).then(() => {
-        this.dataService.fetchData(uid);
-        this.dataService.onSetMode();
+          this.dataService.createUserData(uid).then(() => {
+            this.dataService.fetchData(uid);
+            this.dataService.onSetMode();
+          });
+        
+        },
+        error: error => {
+          this.alertType = 'exist';
+          this.onAlert();
+        }
       });
-      
-      localStorage.setItem('uid', uid);
-    })
+    } else {
+      this.authService.signIn(form.value.email, form.value.password).subscribe({
+        next: response => {
+          const uid = response.user.uid;
+
+          localStorage.setItem('uid', uid);
+
+          this.dataService.fetchData(uid);
+          this.dataService.onSetMode();
+        },
+        error: error => {
+          this.alertType = 'incorrect';
+          this.onAlert();
+        }
+      });
+    }
   }
 }
