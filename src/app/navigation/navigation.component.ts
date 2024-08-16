@@ -3,6 +3,7 @@ import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -33,11 +34,22 @@ export class NavigationComponent implements OnInit{
   location = '';
   dataService = inject(DataService);
   auth = inject(AuthService);
+  theme = '';
 
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
+    this.dataService.getData()
+    .pipe(
+      map(data => data.theme)
+    )
+    .subscribe(theme => {
+      this.theme = theme;
+      document.documentElement.setAttribute('data-theme', this.theme);
+      this.isDarkMode = this.theme === 'dark';
+    });
+
     const theme = document.documentElement.getAttribute('data-theme');
     if (theme === "dark") {
       this.isDarkMode = true;
@@ -89,6 +101,12 @@ export class NavigationComponent implements OnInit{
 
     this.icon.nativeElement.classList.remove('spin-right', 'spin-left');
     this.icon.nativeElement.classList.add(iconClass);
+
+    let user = localStorage.getItem('uid');
+    if (user !== null) {
+      let theme = this.isDarkMode ? 'dark' : 'light';
+      this.dataService.onSetTheme(theme);
+    }
   }
 
   handleToggleTheme(event: KeyboardEvent) {
@@ -101,6 +119,8 @@ export class NavigationComponent implements OnInit{
     this.auth.signOut().subscribe(() => {
       localStorage.removeItem('uid');
       this.dataService.onSetMode();
+      document.documentElement.setAttribute('data-theme', 'light');
+      this.isDarkMode = false;
     })
   }
 }

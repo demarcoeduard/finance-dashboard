@@ -79,6 +79,14 @@ export class DatabaseService {
   getData(): Observable<any> {
     return this.dataSubject.asObservable();
   }
+
+  onSetTheme(theme: string) {
+    let uid = localStorage.getItem('uid');
+    let userRef = ref(this.db, `${uid}/`);
+
+    update(userRef, {theme : theme});
+    this.fetchData(uid!);
+  }
   
   onCreateAccount(type: string, data: any) {
     let uid = localStorage.getItem('uid');

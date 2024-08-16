@@ -38,6 +38,10 @@ export class DataService {
     this.dbService.fetchData(uid);
   }
 
+  onSetTheme(theme: string) {
+    this.dbService.onSetTheme(theme);
+  }
+
   onCreateAccount(type: string, data: any) {
     if (this.demoMode) {
       this.demoService.onCreateAccount(type, data);
