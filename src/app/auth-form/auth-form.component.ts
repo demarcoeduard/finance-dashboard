@@ -12,8 +12,8 @@ import { DataService } from '../services/data.service';
 })
 export class AuthFormComponent {
   isSignUp = true;
-  isAlert = false;;
-  alertType = ''
+  isAlert = false;
+  alertType = '';
   authService = inject(AuthService);
   dataService = inject(DataService);
 
