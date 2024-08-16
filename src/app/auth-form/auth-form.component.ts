@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-form',
@@ -16,6 +17,7 @@ export class AuthFormComponent {
   alertType = '';
   authService = inject(AuthService);
   dataService = inject(DataService);
+  router = inject(Router);
 
   onChangeForm() {
     this.isSignUp = !this.isSignUp;       
@@ -50,6 +52,7 @@ export class AuthFormComponent {
             this.dataService.onSetMode();
           });
         
+          this.router.navigate(['/dashboard']);
         },
         error: error => {
           this.alertType = 'exist';
@@ -65,6 +68,8 @@ export class AuthFormComponent {
 
           this.dataService.fetchData(uid);
           this.dataService.onSetMode();
+
+          this.router.navigate(['/dashboard']);
         },
         error: error => {
           this.alertType = 'incorrect';
