@@ -59,6 +59,7 @@ h1, h2 {
   font-size: 30px;
   margin-top: 120px;
   text-align: center;
+  color: var(--secondary);
 }
 
 .target-container {
