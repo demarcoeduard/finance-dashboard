@@ -1,6 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { DataService } from '../services/data.service';
+import { map } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { Data } from '../services/data.model';
 
 @Component({
   selector: 'app-navigation',
@@ -28,7 +32,9 @@ export class NavigationComponent implements OnInit{
   isDarkMode = false;
   isOpen = true;
   title = '';
-  location = ''
+  location = '';
+  dataService = inject(DataService);
+  auth = inject(AuthService);
 
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
@@ -93,4 +99,10 @@ export class NavigationComponent implements OnInit{
     }
   }
   
+  onLogOut() {
+    this.auth.signOut().subscribe(() => {
+      localStorage.removeItem('uid');
+      this.dataService.onSetMode();
+    })
+  }
 }
