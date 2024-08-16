@@ -46,4 +46,5 @@ export type Data = {
       key?: string;
     }[];
   };
+  theme?: string;
 }

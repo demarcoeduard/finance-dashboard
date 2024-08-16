@@ -31,7 +31,8 @@ export class DatabaseService {
       transfer: [],
       income: [],
       expense: []
-    }
+    },
+    theme: 'light'
   };
   db: Database = inject(Database);
   private dataSubject = new BehaviorSubject(this.data);
@@ -68,7 +69,8 @@ export class DatabaseService {
           transfer: this.convertToIndexedArray(data.transactions?.transfer ?? []),
           income: this.convertToIndexedArray(data.transactions?.income ?? []),
           expense: this.convertToIndexedArray(data.transactions?.expense ?? [])
-        }
+        },
+        theme: data.theme
       }
       this.dataSubject.next(userData);
     });
