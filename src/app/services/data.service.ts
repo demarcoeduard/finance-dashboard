@@ -38,6 +38,14 @@ export class DataService {
     this.dbService.fetchData(uid);
   }
 
+  onGetTheme(): Promise<void> {
+    return new Promise((resolve) => {
+      this.dbService.getData().subscribe(() => {
+        resolve();
+      })
+    })
+  }
+
   onSetTheme(theme: string) {
     this.dbService.onSetTheme(theme);
   }
