@@ -65,6 +65,22 @@ export class NavigationComponent implements OnInit{
     this.router.events.subscribe((event) => {
       this.activatedRoute.firstChild?.data.subscribe(data => {
         this.title = data['title'];
+        let uid = localStorage.getItem('uid');
+        if (uid !== null) {
+          this.dataService.onGetTheme().then(() => {
+            this.dataService.getData()
+            .pipe(
+              filter(data => !!data && !!data.theme),
+              map(data => data.theme)
+            )
+            .subscribe(theme => {
+              this.theme = theme;
+              document.documentElement.setAttribute('data-theme', this.theme);
+              this.isDarkMode = this.theme === 'dark';
+              this.isUser = !!theme;
+            });
+          });
+        };
       });
       this.isOpen = false;
       this.updateNav();
