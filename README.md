@@ -3,19 +3,21 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/demarcoeduard/finance-dashboard)
 
-Welcome to Finance Dashboard! This is your personal finance dashboard where you can get a hold on your finances.
+Welcome to Finance Dashboard! This is your personal finance management tool where you can easily monitor and control you finances without needing to link your personal bank accounts.
 
-**Check out the live website: [Hospital CRM](https://demarcoeduard.github.io/finance-dashboard/)**
+**Check out the live website: [Finance Dashboard](https://demarcoeduard.github.io/finance-dashboard/)**
 
 ## Features
 
-- **Demo View:** You can see and test the websites functionalities using the demo data.
-- **Personal Data:** By creating an account, you can save all of your info for later user.
-- **Dashboard View:** Clearly see your averall data in one place for a better understanding of it.
-- **Realtime Updates:** All the changes you made are updated in realtime all accross the app.
-- **Firebase Integration:** Your account and data is managed with the help of firebase to keep them secure.
-- **Sign Functionalities:** YOu can easily sign up, in and out of your account/s.
-- **Fully Responsive:** By being responsive, you can utilize it on the go wherever you are.
+- **Secure Personal Finance Management:** Manange your finances without the need to connect your bank accounts. Simply create a unique email and password for this app, ensuring your financial data remains safe and separate.
+- **Realtime Data Synchronization:** All changes you make are updated in real-time across all your devices, thanks to Firebase Realtime Database integration.
+- **Comprehensive Dashboard View:** Get a clear overview of your financial data in one place, with viusal insights powered by Chart.js.
+- **Responsive Design:** The fully responsive design ensures you can manage your finances on the go, whether you're using a desktop, tablet, or mobile device. 
+- **Demo Mode:** Explore the app's features using the demo data without needing to create an account.
+- **User Accounts and Authentication:** Sing up, sign in and log out securely with Firebase Authentication. Your data is protected and accessible only to you.
+- **Accounts Management:** Easily create, edit, manage and delete income and expense accounts. Updates are reflected instantly across the dashboard and related transactions.
+- **Transactions Management:** Add, delete and search transactions effortlessly. The app automatically adjusts accounts balances and updates the dashboard accordingly.
+- **Theme Customization:** Choose your desired theme based on your preference. If you're signed in, your theme choice is saved for your next visit.
 
 ## Getting Started
 
@@ -61,17 +63,13 @@ Visit http://localhost:4200 in your web browser to use the application.
 
 ## Usage
 
-- **Creating Accounts**: Easily create accounts by adding the chosen name and the current balance.
-- **Managin Accounts**: You can manage all of the accounts balances at any given time.
-- **Editing Accounts**: By changing the income and expense accounts names, the transactions and the dashboard will get updated automatically to show the correct data.
-- **Deleting Accounts**: Deleting an account will remove it from the dashboard and all the transactions containing it, while keeping the other acocunts state.
-- **Quick Search**: Clicking show transactions, it will send you to the respective transactions and search for the desired account.
-- **Creating Transactions**: Creating a transaction will automatically trigger a change and update the accounts and dashboard.
-- **Deleting Transactions**: The deletion will reverse the transaction and also update the accounts to their previous state.
-- **Searching Transactions**: To only see an account's transactions, you can search its name to filter the list.
-- **Change Theme**: You can simply change the theme to your preferences and if you're signed in, the changed theme will be saved for the next time.
-- **Authentication Functionalities**: At the begining you can either create an account or sing in into an existing one and also log out at any given time.
-- **Database Functionalities**: The updates are managed in realtime whenever you perform any actions inside the accounts, transactions or changing the theme.
+- **Creating Accounts:** Create accounts with custom names and set their initial balances to start tracking your finances.
+- **Managing and Editing Accounts:** Adjust account balances, rename accounts and instantly see the changes reflected in the dashboard and related transactions.
+- **Deleting Accounts:** Remove accounts safely. The app automatically updates the dashboard and related transactions while keeping other accounts intact.
+- **Transaction Management:** Create, edit and delete transactions. The app recalculates your accounts balances and updates the dashboard accordingly.
+- **Searching Transactions:** Use the search feature to filter transactions by account name, making it easier to track specific transactions.
+- **Theme Customization:** Switch between light and dark themes as per your preference. If you're signed in, the theme setting is saved for future visits.
+- **Realtime Updates:** All data changes are synchronized in real-time across all your devices, ensuring consistency no matter where you access the app.
 
 ## Contributing
 
