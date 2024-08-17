@@ -74,6 +74,7 @@ export class DatabaseService {
       }
       this.dataSubject.next(userData);
     });
+    return true;
   }
   
   getData(): Observable<any> {

@@ -48,11 +48,14 @@ export class AuthFormComponent {
           localStorage.setItem('uid', uid);
 
           this.dataService.createUserData(uid).then(() => {
-            this.dataService.fetchData(uid);
+            let data = this.dataService.fetchData(uid);
+
             this.dataService.onSetMode();
+            
+            if (data) {
+              this.router.navigate(['/dashboard']);
+            }
           });
-        
-          this.router.navigate(['/dashboard']);
         },
         error: error => {
           this.alertType = 'exist';

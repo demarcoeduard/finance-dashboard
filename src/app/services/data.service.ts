@@ -35,7 +35,7 @@ export class DataService {
   }
 
   fetchData(uid: string) {
-    this.dbService.fetchData(uid);
+    return this.dbService.fetchData(uid);
   }
 
   onGetTheme(): Promise<void> {
